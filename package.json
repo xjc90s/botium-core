@@ -32,7 +32,6 @@
     "@babel/runtime": "^7.28.6",
     "async": "^3.2.6",
     "body-parser": "^2.2.2",
-    "boolean": "^3.2.0",
     "bottleneck": "^2.19.5",
     "csv-parse": "^6.1.0",
     "debug": "^4.4.3",
