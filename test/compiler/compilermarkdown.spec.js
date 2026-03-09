@@ -116,6 +116,7 @@ describe('compiler.compilermarkdown', function () {
     }
     assert.fail('should have failed')
   })
+
   describe('negating', function () {
     it('should read ! as not', async function () {
       const scriptBuffer = fs.readFileSync(path.resolve(__dirname, CONVOS_DIR, 'convos_with_exclamation.md'))
@@ -130,6 +131,7 @@ describe('compiler.compilermarkdown', function () {
       assert.equal(context.convos[0].conversation[1].not, true)
       assert.equal(context.convos[0].conversation[1].asserters[0].not, true)
     })
+
     it('should read !! as !', async function () {
       const scriptBuffer = fs.readFileSync(path.resolve(__dirname, CONVOS_DIR, 'convos_with_two_exclamation.md'))
       const context = buildContext()
@@ -141,6 +143,7 @@ describe('compiler.compilermarkdown', function () {
       assert.equal(context.convos[0].conversation[1].messageText, '!hello meat bag')
       assert.equal(context.convos[0].conversation[1].not, false)
     })
+
     it('should read n*! as (n-1)*!', async function () {
       const scriptBuffer = fs.readFileSync(path.resolve(__dirname, CONVOS_DIR, 'convos_with_four_exclamation.md'))
       const context = buildContext()
@@ -153,6 +156,7 @@ describe('compiler.compilermarkdown', function () {
       assert.equal(context.convos[0].conversation[1].messageText, '!!!hello meat bag')
       assert.equal(context.convos[0].conversation[1].not, false)
     })
+
     it('should read ! as ! in second line', async function () {
       const scriptBuffer = fs.readFileSync(path.resolve(__dirname, CONVOS_DIR, 'convos_with_exclamation_secline.md'))
       const context = buildContext()
@@ -165,6 +169,7 @@ describe('compiler.compilermarkdown', function () {
       assert.equal(context.convos[0].conversation[1].not, true)
     })
   })
+
   describe('optional', function () {
     it('should read ? as optional', async function () {
       const scriptBuffer = fs.readFileSync(path.resolve(__dirname, CONVOS_DIR, 'convos_with_question.md'))
@@ -179,6 +184,7 @@ describe('compiler.compilermarkdown', function () {
       assert.equal(context.convos[0].conversation[1].optional, true)
       assert.equal(context.convos[0].conversation[1].asserters[0].optional, true)
     })
+
     it('should fail if not all item optional in the same block', async function () {
       const scriptBuffer = fs.readFileSync(path.resolve(__dirname, CONVOS_DIR, 'convos_with_question_invalid.md'))
       const context = buildContext()
@@ -194,6 +200,7 @@ describe('compiler.compilermarkdown', function () {
         assert.equal(err.message, 'Failed to parse conversation. All element in convo step has to be optional or not optional: ["?hello meat bag","BUTTONS checkbutton|checkbutton2"]')
       }
     })
+
     it('should read ?? as ?', async function () {
       const scriptBuffer = fs.readFileSync(path.resolve(__dirname, CONVOS_DIR, 'convos_with_two_question.md'))
       const context = buildContext()
@@ -205,6 +212,7 @@ describe('compiler.compilermarkdown', function () {
       assert.equal(context.convos[0].conversation[1].messageText, '?hello meat bag')
       assert.equal(context.convos[0].conversation[1].optional, false)
     })
+
     it('should read n*? as (n-1)*?', async function () {
       const scriptBuffer = fs.readFileSync(path.resolve(__dirname, CONVOS_DIR, 'convos_with_four_question.md'))
       const context = buildContext()
@@ -217,6 +225,7 @@ describe('compiler.compilermarkdown', function () {
       assert.equal(context.convos[0].conversation[1].messageText, '???hello meat bag')
       assert.equal(context.convos[0].conversation[1].optional, false)
     })
+
     it('should read ? as ? in second line', async function () {
       const scriptBuffer = fs.readFileSync(path.resolve(__dirname, CONVOS_DIR, 'convos_with_question_secline.md'))
       const context = buildContext()
@@ -229,6 +238,7 @@ describe('compiler.compilermarkdown', function () {
       assert.equal(context.convos[0].conversation[1].optional, true)
     })
   })
+
   describe('optional and negate', function () {
     it('should read ?! as optional and not', async function () {
       const scriptBuffer = fs.readFileSync(path.resolve(__dirname, CONVOS_DIR, 'convos_with_question_exclamation.md'))
@@ -242,6 +252,7 @@ describe('compiler.compilermarkdown', function () {
       assert.equal(context.convos[0].conversation[1].optional, true)
       assert.equal(context.convos[0].conversation[1].not, true)
     })
+
     it('should read ??! as ?!', async function () {
       const scriptBuffer = fs.readFileSync(path.resolve(__dirname, CONVOS_DIR, 'convos_with_two_question_exclamation.md'))
       const context = buildContext()

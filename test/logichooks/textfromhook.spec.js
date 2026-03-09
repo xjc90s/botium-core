@@ -43,6 +43,7 @@ describe('logichooks.textfromhook', function () {
     assert.lengthOf(transcript.steps, 2)
     assert.equal(transcript.steps[0].actual.testAttribute, 'val1')
   })
+
   it('should use text from onBotPrepare logic hook', async function () {
     const { compiler, container } = await buildDriver({
       [Capabilities.LOGIC_HOOKS]: [{

@@ -36,6 +36,7 @@ describe('convo.retries', function () {
       await this.container.Start()
     }
   })
+
   afterEach(async function () {
     await this.container.Stop()
     await this.container.Clean()
@@ -53,12 +54,14 @@ describe('convo.retries', function () {
     }
     assert.fail('should have failed without retry')
   })
+
   it('should succeed after one retry with default settings', async function () {
     await this.init(1, 'myerror', 'myerror')
 
     this.compiler.ReadScript(path.resolve(__dirname, 'convos'), '1step.convo.txt')
     await this.compiler.convos[0].Run(this.container)
   })
+
   it('should fail after one retry with default settings', async function () {
     await this.init(2, 'myerror', 'myerror')
 
@@ -71,12 +74,14 @@ describe('convo.retries', function () {
     }
     assert.fail('should have failed after first retry')
   })
+
   it('should succeed after many retries', async function () {
     await this.init(5, 'myerror', 'myerror', 5)
 
     this.compiler.ReadScript(path.resolve(__dirname, 'convos'), '1step.convo.txt')
     await this.compiler.convos[0].Run(this.container)
   })
+
   it('should succeed after too less retries', async function () {
     await this.init(5, 'myerror', 'myerror', 4)
 
@@ -89,12 +94,14 @@ describe('convo.retries', function () {
     }
     assert.fail('should have failed after four retries')
   })
+
   it('should succeed after one retry with regexp pattern', async function () {
     await this.init(1, 'myerror', /myeRRor/i)
 
     this.compiler.ReadScript(path.resolve(__dirname, 'convos'), '1step.convo.txt')
     await this.compiler.convos[0].Run(this.container)
   })
+
   it('should fail after one retry with unmatched regexp pattern', async function () {
     await this.init(1, 'myerror', /myeRRor1/i)
 
@@ -107,12 +114,14 @@ describe('convo.retries', function () {
     }
     assert.fail('should have failed with unmatched retry pattern')
   })
+
   it('should succeed after one retry with regexp pattern array', async function () {
     await this.init(1, 'myerror', [/myeRRor/i, /myeRRor1/i])
 
     this.compiler.ReadScript(path.resolve(__dirname, 'convos'), '1step.convo.txt')
     await this.compiler.convos[0].Run(this.container)
   })
+
   it('should fail after one retry with unmatched regexp pattern array', async function () {
     await this.init(1, 'myerror', [/myeRRor1/i, /myeRRor2/i])
 

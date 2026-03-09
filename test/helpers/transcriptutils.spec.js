@@ -50,6 +50,7 @@ describe('helpers.transcriptutils', function () {
       }
       await container.Clean()
     })
+
     it('should return false if there is no timeout', async function () {
       const myCaps = {
         [Capabilities.PROJECTNAME]: 'helpers.transcriptutils.hasTimeout should return false if there is no timeout',

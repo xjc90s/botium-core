@@ -30,6 +30,7 @@ describe('scriptingModificator.assertions', function () {
       }
     })
   })
+
   it('should use assertConvoNotStep for "not" modificator and fail with generic handler', async function () {
     const scriptingProvider = new ScriptingProvider(DefaultCapabilities)
     await scriptingProvider.Build()

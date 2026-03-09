@@ -49,6 +49,7 @@ describe('logichooks.hookfromsrc', function () {
       compiler.ReadScript(path.resolve(__dirname, 'convos'), 'HOOKFROMSRC.convo.txt')
       await compiler.convos[0].Run(container)
     })
+
     it('should fail with asserter from code', async function () {
       const { compiler, container } = await buildDriver({
         [Capabilities.ASSERTERS]: [{
@@ -69,6 +70,7 @@ describe('logichooks.hookfromsrc', function () {
         assert.isTrue(err.message.includes('Line 6: assertion error - expected Hello1'))
       }
     })
+
     it('should fail with asserter with invalid script', async function () {
       const { compiler, container } = await buildDriver({
         [Capabilities.ASSERTERS]: [{
@@ -113,6 +115,7 @@ describe('logichooks.hookfromsrc', function () {
       compiler.ReadScript(path.resolve(__dirname, 'convos'), 'HOOKFROMSRC.convo.txt')
       await compiler.convos[0].Run(container)
     })
+
     it('should succeed with asserter from asserter module file', async function () {
       const { compiler, container } = await buildDriverFromFile({
         [Capabilities.ASSERTERS]: [{

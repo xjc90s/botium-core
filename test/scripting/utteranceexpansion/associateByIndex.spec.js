@@ -81,6 +81,7 @@ describe('scripting.utteranceexpansion.associateByIndex', function () {
     assert.equal(scriptingProvider.convos[4].header.name, 'test convo/UTT_HELLO-L3/UTT_GOODBYE-L5')
     assert.deepEqual(scriptingProvider.convos[4].conversation.length, 6)
   })
+
   it('should associate media by index', async function () {
     const scriptingProvider = new ScriptingProvider(CAPS)
     await scriptingProvider.Build()
@@ -151,6 +152,7 @@ describe('scripting.utteranceexpansion.associateByIndex', function () {
     assert.equal(scriptingProvider.convos[4].header.name, 'test convo/MEDIA-step0voice2.wav/MEDIA-step2voice5.wav')
     assert.deepEqual(scriptingProvider.convos[4].conversation.length, 6)
   })
+
   it('should associate utterance and media by index', async function () {
     const scriptingProvider = new ScriptingProvider(CAPS)
     await scriptingProvider.Build()

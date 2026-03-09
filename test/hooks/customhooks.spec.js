@@ -65,6 +65,7 @@ describe('customhooks.hookfromsrc', function () {
     assert.isTrue(onStopCalled)
     assert.isTrue(onCleanCalled)
   })
+
   it('should change meMsg from hook', async function () {
     const { container } = await buildDriver({
       [Capabilities.CUSTOMHOOK_ONUSERSAYS]: ({ meMsg }) => {
@@ -79,6 +80,7 @@ describe('customhooks.hookfromsrc', function () {
 
     assert.equal(botMsg.testInput, 1)
   })
+
   it('should change botMsg from hook', async function () {
     const { container } = await buildDriver({
       [Capabilities.CUSTOMHOOK_ONBOTRESPONSE]: ({ botMsg }) => {
@@ -93,6 +95,7 @@ describe('customhooks.hookfromsrc', function () {
 
     assert.equal(botMsg.fromHook, 1)
   })
+
   it('should call http api from function', async function () {
     const scope = nock('https://gettoken.com')
       .get('/get')

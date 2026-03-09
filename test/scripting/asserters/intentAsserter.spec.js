@@ -13,24 +13,28 @@ describe('scripting.asserters.intentAsserter', function () {
       'greetings'
     )
   })
+
   it('negative case for intent asserter, missing arg', async function () {
     return _assert(
       null,
       'greetings'
     )
   })
+
   it('negative case for intent asserter, missing intent from response', async function () {
     return _assert(
       'greetings',
       null
     )
   })
+
   it('negative case for intent asserter, wrong intent', async function () {
     return _assert(
       'greetings',
       'order'
     )
   })
+
   it('negative case for intent asserter, wrong intent, details', async function () {
     try {
       await asserter.assertConvoStep({

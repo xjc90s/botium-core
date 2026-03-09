@@ -34,6 +34,7 @@ botText
 `
     )
   })
+
   it('should decompile convo with negated messageText', async function () {
     const scriptingProvider = new ScriptingProvider(DefaultCapabilities)
     await scriptingProvider.Build()
@@ -59,6 +60,7 @@ botText
 `
     )
   })
+
   it('should decompile convo with optional messageText', async function () {
     const scriptingProvider = new ScriptingProvider(DefaultCapabilities)
     await scriptingProvider.Build()
@@ -91,6 +93,7 @@ botText2
 `
     )
   })
+
   it('should decompile convo with optional and negated messageText', async function () {
     const scriptingProvider = new ScriptingProvider(DefaultCapabilities)
     await scriptingProvider.Build()
@@ -126,6 +129,7 @@ botText2
 `
     )
   })
+
   it('should fail decompile convo with mixed optional step', async function () {
     const scriptingProvider = new ScriptingProvider(DefaultCapabilities)
     await scriptingProvider.Build()
@@ -152,6 +156,7 @@ botText2
       assert.equal(err.message, 'Step 1: Failed to decompile conversation. Mixed optional flag is not allowed inside one step.')
     }
   })
+
   it('should decompile logichook', async function () {
     const scriptingProvider = new ScriptingProvider(DefaultCapabilities)
     await scriptingProvider.Build()
@@ -178,6 +183,7 @@ PAUSE 100
 `
     )
   })
+
   it('should decompile logichook without message', async function () {
     const scriptingProvider = new ScriptingProvider(DefaultCapabilities)
     await scriptingProvider.Build()
@@ -202,6 +208,7 @@ PAUSE 100
 `
     )
   })
+
   it('should decompile logichook with message null', async function () {
     const scriptingProvider = new ScriptingProvider(DefaultCapabilities)
     await scriptingProvider.Build()
@@ -227,6 +234,7 @@ PAUSE 100
 `
     )
   })
+
   it('should decompile button asserter', async function () {
     const scriptingProvider = new ScriptingProvider(DefaultCapabilities)
     await scriptingProvider.Build()
@@ -259,6 +267,7 @@ BUTTONS buttontext|buttontext 2
 `
     )
   })
+
   it('should decompile button asserter with negation', async function () {
     const scriptingProvider = new ScriptingProvider(DefaultCapabilities)
     await scriptingProvider.Build()
@@ -283,6 +292,7 @@ BUTTONS buttontext|buttontext 2
 `
     )
   })
+
   it('should decompile optional button asserter', async function () {
     const scriptingProvider = new ScriptingProvider(DefaultCapabilities)
     await scriptingProvider.Build()
@@ -314,6 +324,7 @@ botText
 `
     )
   })
+
   it('should decompile optional button asserter with negation', async function () {
     const scriptingProvider = new ScriptingProvider(DefaultCapabilities)
     await scriptingProvider.Build()
@@ -345,6 +356,7 @@ botText
 `
     )
   })
+
   it('should decompile button asserter with numeric text', async function () {
     const scriptingProvider = new ScriptingProvider(DefaultCapabilities)
     await scriptingProvider.Build()
@@ -372,6 +384,7 @@ BUTTONS 123|456
 `
     )
   })
+
   it('should decompile media asserter', async function () {
     const scriptingProvider = new ScriptingProvider(DefaultCapabilities)
     await scriptingProvider.Build()
@@ -396,6 +409,7 @@ MEDIA test1.png|test2.png
 `
     )
   })
+
   it('should decompile custom asserter', async function () {
     const scriptingProvider = new ScriptingProvider(DefaultCapabilities)
     await scriptingProvider.Build()
@@ -420,6 +434,7 @@ myasserter arg1|arg2
 `
     )
   })
+
   it('should decompile button user input', async function () {
     const scriptingProvider = new ScriptingProvider(DefaultCapabilities)
     await scriptingProvider.Build()
@@ -445,6 +460,7 @@ BUTTON buttonpayload|buttontext
 `
     )
   })
+
   it('should decompile button with object payload user input', async function () {
     const scriptingProvider = new ScriptingProvider(DefaultCapabilities)
     await scriptingProvider.Build()
@@ -475,6 +491,7 @@ BUTTON {"bp":"buttonpayload"}|buttontext
 `
     )
   })
+
   it('should decompile media user input', async function () {
     const scriptingProvider = new ScriptingProvider(DefaultCapabilities)
     await scriptingProvider.Build()
@@ -499,6 +516,7 @@ MEDIA test1.png
 `
     )
   })
+
   it('should decompile media with base64 in bot response', async function () {
     const scriptingProvider = new ScriptingProvider(DefaultCapabilities)
     await scriptingProvider.Build()
@@ -613,6 +631,7 @@ CARDS text of card2
 `
     )
   })
+
   it('should decompile custom user input', async function () {
     const scriptingProvider = new ScriptingProvider(DefaultCapabilities)
     await scriptingProvider.Build()
@@ -639,6 +658,7 @@ CUSTOMINPUT arg1|arg2
 `
     )
   })
+
   it('should escape pipe in args', async function () {
     const scriptingProvider = new ScriptingProvider(DefaultCapabilities)
     await scriptingProvider.Build()

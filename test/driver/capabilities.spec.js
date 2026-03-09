@@ -11,18 +11,21 @@ describe('driver.capabilities', function () {
       assert.isArray(result)
       assert.lengthOf(result, 1)
     })
+
     it('fetch capabilities from non existing files', function () {
       const driver = new BotDriver()
       const result = driver._fetchConfigFromFiles(['test/driver/configFiles/configNotExists.json'])
       assert.isArray(result)
       assert.lengthOf(result, 0)
     })
+
     it('fetch capabilities from multiple files', function () {
       const driver = new BotDriver()
       const result = driver._fetchConfigFromFiles(['test/driver/configFiles/config1.json', 'test/driver/configFiles/config2.json'])
       assert.isArray(result)
       assert.lengthOf(result, 2)
     })
+
     it('fetch capabilities from multiple files and check if overwritten', function () {
       const driver = new BotDriver()
       driver._fetchConfigFromFiles(['test/driver/configFiles/config1.json', 'test/driver/configFiles/config2.json'])
@@ -38,16 +41,19 @@ describe('driver.capabilities', function () {
       const result = driver._loadConfigFile('test/driver/configFiles/config1.json')
       assert.isTrue(result)
     })
+
     it('load Config from non existing file', function () {
       const driver = new BotDriver()
       assert.throws(() => driver._loadConfigFile('test/driver/configFiles/configNonExisting.json'))
     })
+
     it('load Config from file only once', function () {
       const driver = new BotDriver()
       driver._fetchConfigFromFiles(['test/driver/configFiles/config1.json', 'test/driver/configFiles/config1.json', 'test/driver/configFiles/config1.json'])
       assert.lengthOf(driver._fetchedConfigFiles, 1)
       assert.lengthOf(driver.caps.ARR_CAP, 2)
     })
+
     it('should make unique array', function () {
       const driver = new BotDriver()
       driver._fetchConfigFromFiles(['test/driver/configFiles/config1.json', 'test/driver/configFiles/config2.json'])
@@ -66,6 +72,7 @@ describe('driver.capabilities', function () {
       assert.isBoolean(driver.caps[Capabilities.SIMPLEREST_PING_PROCESS_RESPONSE])
       assert.isTrue(driver.caps[Capabilities.SIMPLEREST_PING_PROCESS_RESPONSE])
     })
+
     it('should merge string caps', function () {
       const myCaps = {
         CAP_STRING_1: 'Test',
@@ -75,6 +82,7 @@ describe('driver.capabilities', function () {
       assert.isString(driver.caps.CAP_STRING_1)
       assert.isString(driver.caps.CAP_STRING_2)
     })
+
     it('should merge string caps when there are numbers', function () {
       const myCaps = {
         CAP_STRING_1: 'Test',
@@ -84,6 +92,7 @@ describe('driver.capabilities', function () {
       assert.strictEqual(driver.caps.CAP_STRING_1, myCaps.CAP_STRING_1)
       assert.strictEqual(driver.caps.CAP_STRING_2, myCaps.CAP_STRING_2)
     })
+
     it('should merge boolean envs', function () {
       process.env.BOTIUM_SIMPLEREST_PING_PROCESS_RESPONSE = 'NO'
       const driver = new BotDriver()
@@ -91,6 +100,7 @@ describe('driver.capabilities', function () {
       assert.isBoolean(driver.caps[Capabilities.SIMPLEREST_PING_PROCESS_RESPONSE])
       assert.isFalse(driver.caps[Capabilities.SIMPLEREST_PING_PROCESS_RESPONSE])
     })
+
     it('should parse array caps', function () {
       DefaultCapabilities.MYCAP = []
       const myCaps = {
@@ -100,6 +110,7 @@ describe('driver.capabilities', function () {
       assert.isArray(driver.caps.MYCAP)
       assert.lengthOf(driver.caps.MYCAP, 2)
     })
+
     it('should merge array caps', function () {
       DefaultCapabilities.MYCAP = [{
         id: 'id1',
@@ -116,6 +127,7 @@ describe('driver.capabilities', function () {
       assert.isUndefined(driver.caps.MYCAP[1].id)
       assert.equal(driver.caps.MYCAP[1].key, 'VALUE1')
     })
+
     it('should parse object caps', function () {
       DefaultCapabilities.MYCAP = { KEY: 'VALUE' }
       const myCaps = {
@@ -125,6 +137,7 @@ describe('driver.capabilities', function () {
       assert.isObject(driver.caps.MYCAP)
       assert.equal(driver.caps.MYCAP.KEY, 'VALUE1')
     })
+
     it('should merge object caps', function () {
       DefaultCapabilities.MYCAP = { KEY: 'VALUE' }
       const myCaps = {
@@ -135,6 +148,7 @@ describe('driver.capabilities', function () {
       assert.equal(driver.caps.MYCAP.KEY, 'VALUE')
       assert.equal(driver.caps.MYCAP.KEY1, 'VALUE1')
     })
+
     it('should not parse JSON caps', function () {
       const myCaps = {
         MYJSONCAP: '{"KEY":"VALUE1"}'
@@ -143,6 +157,7 @@ describe('driver.capabilities', function () {
       assert.isObject(driver.caps.MYJSONCAP)
       assert.equal(driver.caps.MYJSONCAP.KEY, 'VALUE1')
     })
+
     it('should override not matching object caps', function () {
       DefaultCapabilities.MYCAP = { KEY: 'VALUE' }
       const myCaps = {
@@ -152,6 +167,7 @@ describe('driver.capabilities', function () {
       assert.isString(driver.caps.MYCAP)
       assert.equal(driver.caps.MYCAP, 'SIMPLESTRING')
     })
+
     it('should override not matching array caps', function () {
       DefaultCapabilities.MYCAP = ['VAL1', 'VAL2']
       const myCaps = {

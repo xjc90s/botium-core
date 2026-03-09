@@ -30,6 +30,7 @@ describe('scripting.userinputs.mediaInputConvos', function () {
       this.compiler = driver.BuildCompiler()
       this.container = await driver.Build()
     })
+
     afterEach(async function () {
       this.container && await this.container.Clean()
     })
@@ -82,6 +83,7 @@ describe('scripting.userinputs.mediaInputConvos', function () {
       assert.isTrue(transcript.steps[0].actual.media[1].downloadUri.endsWith('test/scripting/userinputs/convos/test2.jpg'))
       assert.equal(transcript.steps[0].actual.media[1].mimeType, 'image/jpeg')
     })
+
     it('should expand media list in user message', async function () {
       this.compiler.ReadScript(path.resolve(__dirname, 'convos'), 'medialist.convo.txt')
       this.compiler.ExpandConvos()
@@ -92,6 +94,7 @@ describe('scripting.userinputs.mediaInputConvos', function () {
       assert.equal(this.compiler.convos[1].conversation[0].userInputs[0].args[0], 'test2.jpg')
       assert.equal(this.compiler.convos[2].conversation[0].userInputs[0].args[0], 'test3.jpg')
     })
+
     it('should expand media wc from convoDir in user message', async function () {
       this.compiler.ReadScript(path.resolve(__dirname, 'convos'), 'mediawc.convo.txt')
       this.compiler.ExpandConvos()
@@ -148,6 +151,7 @@ MEDIA ${mediaUri}
       this.compiler = driver.BuildCompiler()
       this.container = await driver.Build()
     })
+
     afterEach(async function () {
       this.container && await this.container.Clean()
     })
@@ -205,6 +209,7 @@ MEDIA ${mediaUri}
       this.compiler = driver.BuildCompiler()
       this.container = await driver.Build()
     })
+
     afterEach(async function () {
       this.container && await this.container.Clean()
     })
@@ -221,6 +226,7 @@ MEDIA ${mediaUri}
       assert.equal(transcript.steps[0].actual.media[0].downloadUri, 'https://www.google.at/botium.png')
       assert.equal(transcript.steps[0].actual.media[0].mimeType, 'image/png')
     })
+
     it('should add media with default baseUri in user message', async function () {
       this.compiler.ReadScript(path.resolve(__dirname, 'convos'), 'media.convo.txt')
       assert.equal(this.compiler.convos.length, 1)
@@ -258,6 +264,7 @@ MEDIA ${mediaUri}
       this.compiler = driver.BuildCompiler()
       this.container = await driver.Build()
     })
+
     afterEach(async function () {
       this.container && await this.container.Clean()
     })
@@ -297,6 +304,7 @@ MEDIA ${mediaUri}
       this.compiler = driver.BuildCompiler()
       this.container = await driver.Build()
     })
+
     afterEach(async function () {
       this.container && await this.container.Clean()
     })
@@ -393,6 +401,7 @@ MEDIA ${mediaUri}
       this.compiler = driver.BuildCompiler()
       this.container = await driver.Build()
     })
+
     afterEach(async function () {
       this.container && await this.container.Clean()
     })
@@ -430,6 +439,7 @@ MEDIA ${mediaUri}
       this.compiler = driver.BuildCompiler()
       this.container = await driver.Build()
     })
+
     afterEach(async function () {
       this.container && await this.container.Clean()
     })

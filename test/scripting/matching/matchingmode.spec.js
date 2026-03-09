@@ -28,6 +28,7 @@ describe('scripting.matching.matchingmode', function () {
       this.compiler = driver.BuildCompiler()
       this.container = await driver.Build()
     })
+
     afterEach(async function () {
       this.container && await this.container.Clean()
     })
@@ -56,6 +57,7 @@ describe('scripting.matching.matchingmode', function () {
       this.compiler = driver.BuildCompiler()
       this.container = await driver.Build()
     })
+
     afterEach(async function () {
       this.container && await this.container.Clean()
     })
@@ -64,9 +66,11 @@ describe('scripting.matching.matchingmode', function () {
       this.compiler.ReadScript(path.resolve(__dirname, 'convos'), 'regex.convo.txt')
       await this.compiler.convos[0].Run(this.container)
     })
+
     it('should match case sensitive response', async function () {
       assert.isTrue(this.compiler.Match('This is a long text', 'This .*'))
     })
+
     it('should not match uppercase response', async function () {
       assert.isFalse(this.compiler.Match('THIS is a long text', 'This .*'))
     })
@@ -83,6 +87,7 @@ describe('scripting.matching.matchingmode', function () {
       this.compiler = driver.BuildCompiler()
       this.container = await driver.Build()
     })
+
     afterEach(async function () {
       this.container && await this.container.Clean()
     })
@@ -91,12 +96,15 @@ describe('scripting.matching.matchingmode', function () {
       this.compiler.ReadScript(path.resolve(__dirname, 'convos'), 'regex.convo.txt')
       await this.compiler.convos[0].Run(this.container)
     })
+
     it('should match case sensitive response', async function () {
       assert.isTrue(this.compiler.Match('This is a long text', 'This .*'))
     })
+
     it('should match uppercase response', async function () {
       assert.isTrue(this.compiler.Match('THIS is a long text', 'This .*'))
     })
+
     it('should not match if pattern is not matching', async function () {
       assert.isFalse(this.compiler.Match('This is a long text', 'notthere .*'))
     })
@@ -113,6 +121,7 @@ describe('scripting.matching.matchingmode', function () {
       this.compiler = driver.BuildCompiler()
       this.container = await driver.Build()
     })
+
     afterEach(async function () {
       this.container && await this.container.Clean()
     })
@@ -120,9 +129,11 @@ describe('scripting.matching.matchingmode', function () {
     it('should match case sensitive response', async function () {
       assert.isTrue(this.compiler.Match('This is a long text', 'is a'))
     })
+
     it('should not match uppercase response', async function () {
       assert.isFalse(this.compiler.Match('This is a long text', 'IS A'))
     })
+
     it('should not match if pattern is not matching', async function () {
       assert.isFalse(this.compiler.Match('This is a long text', 'notthere'))
     })
@@ -139,6 +150,7 @@ describe('scripting.matching.matchingmode', function () {
       this.compiler = driver.BuildCompiler()
       this.container = await driver.Build()
     })
+
     afterEach(async function () {
       this.container && await this.container.Clean()
     })
@@ -146,18 +158,23 @@ describe('scripting.matching.matchingmode', function () {
     it('should match response with substring', async function () {
       assert.isTrue(this.compiler.Match('Interesting...', 'Interesting'))
     })
+
     it('should match long response with wildcard', async function () {
       assert.isTrue(this.compiler.Match('this is a long text', 'this is a * text'))
     })
+
     it('should match very long response with wildcard', async function () {
       assert.isTrue(this.compiler.Match('this is a long text this is a long text this is a long text this is a long text', 'this is a * text this is a * text this is a * text'))
     })
+
     it('should not match long uppcercase response with wildcard', async function () {
       assert.isFalse(this.compiler.Match('THIS IS A LONG TEXT', 'this is a * text'))
     })
+
     it('should match very long response with very long wildcard', async function () {
       assert.isTrue(this.compiler.Match('begin this is a long text this is a long text this is a long text this is a long text end', 'begin * end'))
     })
+
     it('should not allow more than 10 wildcards in a string', async function () {
       try {
         this.compiler.Match('some text', 'begin * * * * * * * * * * * end')
@@ -166,6 +183,7 @@ describe('scripting.matching.matchingmode', function () {
         assert.equal(err.message, 'Maximum number of 10 wildcards supported.')
       }
     })
+
     it('should not match if pattern is not matching', async function () {
       assert.isFalse(this.compiler.Match('This is a long text', '*notthere*'))
     })
@@ -182,6 +200,7 @@ describe('scripting.matching.matchingmode', function () {
       this.compiler = driver.BuildCompiler()
       this.container = await driver.Build()
     })
+
     afterEach(async function () {
       this.container && await this.container.Clean()
     })
@@ -189,15 +208,19 @@ describe('scripting.matching.matchingmode', function () {
     it('should match response with substring', async function () {
       assert.isTrue(this.compiler.Match('You said: So.....', 'so...'))
     })
+
     it('should match long response with wildcard', async function () {
       assert.isTrue(this.compiler.Match('this is a long text', 'this is a * text'))
     })
+
     it('should match long uppcercase response with wildcard', async function () {
       assert.isTrue(this.compiler.Match('THIS IS A LONG TEXT', 'this is a * text'))
     })
+
     it('should not match if pattern is not matching', async function () {
       assert.isFalse(this.compiler.Match('This is a long text', '*notthere*'))
     })
+
     it('should match response with utterances list', async function () {
       this.compiler.scriptingEvents.assertBotResponse('So.....', [
         'lol',
@@ -225,6 +248,7 @@ describe('scripting.matching.matchingmode', function () {
       this.compiler = driver.BuildCompiler()
       this.container = await driver.Build()
     })
+
     afterEach(async function () {
       this.container && await this.container.Clean()
     })
@@ -232,18 +256,23 @@ describe('scripting.matching.matchingmode', function () {
     it('should not match response with substring', async function () {
       assert.isFalse(this.compiler.Match('Interesting...', 'Interesting'))
     })
+
     it('should match long response with wildcard', async function () {
       assert.isTrue(this.compiler.Match('this is a long text', 'this is a * text'))
     })
+
     it('should match very long response with wildcard', async function () {
       assert.isTrue(this.compiler.Match('this is a long text this is a long text this is a long text this is a long text', 'this is a * text this is a * text this is a * text this is a * text'))
     })
+
     it('should not match long uppcercase response with wildcard', async function () {
       assert.isFalse(this.compiler.Match('THIS IS A LONG TEXT', 'this is a * text'))
     })
+
     it('should match very long response with very long wildcard', async function () {
       assert.isTrue(this.compiler.Match('begin this is a long text this is a long text this is a long text this is a long text end', 'begin * end'))
     })
+
     it('should not allow more than 10 wildcards in a string', async function () {
       try {
         this.compiler.Match('some text', 'begin * * * * * * * * * * * end')
@@ -252,6 +281,7 @@ describe('scripting.matching.matchingmode', function () {
         assert.equal(err.message, 'Maximum number of 10 wildcards supported.')
       }
     })
+
     it('should not match if pattern is not matching', async function () {
       assert.isFalse(this.compiler.Match('This is a long text', '*notthere*'))
     })
@@ -268,6 +298,7 @@ describe('scripting.matching.matchingmode', function () {
       this.compiler = driver.BuildCompiler()
       this.container = await driver.Build()
     })
+
     afterEach(async function () {
       this.container && await this.container.Clean()
     })
@@ -275,9 +306,11 @@ describe('scripting.matching.matchingmode', function () {
     it('should match case sensitive response', async function () {
       assert.isTrue(this.compiler.Match('This is a long text', 'This is a long text'))
     })
+
     it('should not match uppercase response', async function () {
       assert.isFalse(this.compiler.Match('This is a long text', 'THIS is a long text'))
     })
+
     it('should not match for partial match', async function () {
       assert.isFalse(this.compiler.Match('This is a long text', 'long'))
     })
@@ -294,6 +327,7 @@ describe('scripting.matching.matchingmode', function () {
       this.compiler = driver.BuildCompiler()
       this.container = await driver.Build()
     })
+
     afterEach(async function () {
       this.container && await this.container.Clean()
     })
@@ -301,9 +335,11 @@ describe('scripting.matching.matchingmode', function () {
     it('should match case sensitive response', async function () {
       assert.isTrue(this.compiler.Match('This is a long text', 'This is a long text'))
     })
+
     it('should match uppercase response', async function () {
       assert.isTrue(this.compiler.Match('This is a long text', 'THIS is a long text'))
     })
+
     it('should not match for partial match', async function () {
       assert.isFalse(this.compiler.Match('This is a long text', 'long'))
     })
@@ -321,6 +357,7 @@ describe('scripting.matching.matchingmode', function () {
       this.compiler = driver.BuildCompiler()
       this.container = await driver.Build()
     })
+
     afterEach(async function () {
       this.container && await this.container.Clean()
     })
@@ -329,6 +366,7 @@ describe('scripting.matching.matchingmode', function () {
       assert.isFalse(this.compiler.Match('test 123', 'tast 123'))
     })
   })
+
   describe('wer.lowthreshold (percentage)', function () {
     beforeEach(async function () {
       const myCaps = {
@@ -341,6 +379,7 @@ describe('scripting.matching.matchingmode', function () {
       this.compiler = driver.BuildCompiler()
       this.container = await driver.Build()
     })
+
     afterEach(async function () {
       this.container && await this.container.Clean()
     })
@@ -362,6 +401,7 @@ describe('scripting.matching.matchingmode', function () {
       this.compiler = driver.BuildCompiler()
       this.container = await driver.Build()
     })
+
     afterEach(async function () {
       this.container && await this.container.Clean()
     })
@@ -370,6 +410,7 @@ describe('scripting.matching.matchingmode', function () {
       assert.isTrue(this.compiler.Match('test 123', 'tast 123'))
     })
   })
+
   describe('wer.highthreshold (percentage)', function () {
     beforeEach(async function () {
       const myCaps = {
@@ -382,6 +423,7 @@ describe('scripting.matching.matchingmode', function () {
       this.compiler = driver.BuildCompiler()
       this.container = await driver.Build()
     })
+
     afterEach(async function () {
       this.container && await this.container.Clean()
     })
@@ -403,6 +445,7 @@ describe('scripting.matching.matchingmode', function () {
       this.compiler = driver.BuildCompiler()
       this.container = await driver.Build()
     })
+
     afterEach(async function () {
       this.container && await this.container.Clean()
     })
@@ -411,6 +454,7 @@ describe('scripting.matching.matchingmode', function () {
       assert.isFalse(this.compiler.Match('This is an example', '* that are * hot'))
     })
   })
+
   describe('wer.lowthreshold.wildcard (percentage)', function () {
     beforeEach(async function () {
       const myCaps = {
@@ -423,6 +467,7 @@ describe('scripting.matching.matchingmode', function () {
       this.compiler = driver.BuildCompiler()
       this.container = await driver.Build()
     })
+
     afterEach(async function () {
       this.container && await this.container.Clean()
     })
@@ -444,6 +489,7 @@ describe('scripting.matching.matchingmode', function () {
       this.compiler = driver.BuildCompiler()
       this.container = await driver.Build()
     })
+
     afterEach(async function () {
       this.container && await this.container.Clean()
     })
@@ -452,6 +498,7 @@ describe('scripting.matching.matchingmode', function () {
       assert.isTrue(this.compiler.Match('this is an example', 'this is * sample'))
     })
   })
+
   describe('wer.highthreshold.wildcard (percentage)', function () {
     beforeEach(async function () {
       const myCaps = {
@@ -464,6 +511,7 @@ describe('scripting.matching.matchingmode', function () {
       this.compiler = driver.BuildCompiler()
       this.container = await driver.Build()
     })
+
     afterEach(async function () {
       this.container && await this.container.Clean()
     })

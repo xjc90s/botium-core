@@ -24,6 +24,7 @@ describe('scripting.asserters.cardsAsserter', function () {
         }
       })
     })
+
     it('should succeed on existing card subtext', async function () {
       await this.cardsAsserter.assertConvoStep({
         convoStep: { stepTag: 'test' },
@@ -37,6 +38,7 @@ describe('scripting.asserters.cardsAsserter', function () {
         }
       })
     })
+
     it('should succeed on existing card content', async function () {
       await this.cardsAsserter.assertConvoStep({
         convoStep: { stepTag: 'test' },
@@ -50,6 +52,7 @@ describe('scripting.asserters.cardsAsserter', function () {
         }
       })
     })
+
     it('should succeed on multiple existing cards', async function () {
       await this.cardsAsserter.assertConvoStep({
         convoStep: { stepTag: 'test' },
@@ -66,6 +69,7 @@ describe('scripting.asserters.cardsAsserter', function () {
         }
       })
     })
+
     it('should fail on missing card', async function () {
       try {
         await this.cardsAsserter.assertConvoStep({
@@ -84,6 +88,7 @@ describe('scripting.asserters.cardsAsserter', function () {
         assert.deepEqual(err.context.cause.diff, ['missingcard'])
       }
     })
+
     it('should fail on one missing card', async function () {
       try {
         await this.cardsAsserter.assertConvoStep({
@@ -112,6 +117,7 @@ describe('scripting.asserters.cardsAsserter', function () {
         assert.deepEqual(err.context.cause.diff, ['missingcard'])
       }
     })
+
     it('should succeed on unexpected card text', async function () {
       await this.cardsAsserter.assertNotConvoStep({
         convoStep: { stepTag: 'test' },
@@ -125,6 +131,7 @@ describe('scripting.asserters.cardsAsserter', function () {
         }
       })
     })
+
     it('should fail on one unexpected card', async function () {
       try {
         await this.cardsAsserter.assertNotConvoStep({
@@ -153,6 +160,7 @@ describe('scripting.asserters.cardsAsserter', function () {
         assert.deepEqual(err.context.cause.diff, ['existingcard'])
       }
     })
+
     it('should succeed on existing card if has no arg', async function () {
       await this.cardsAsserter.assertConvoStep({
         convoStep: { stepTag: 'test' },
@@ -166,6 +174,7 @@ describe('scripting.asserters.cardsAsserter', function () {
         }
       })
     })
+
     it('should fail on no card if has no arg', async function () {
       try {
         await this.cardsAsserter.assertConvoStep({ convoStep: { stepTag: 'test' } })
@@ -180,9 +189,11 @@ describe('scripting.asserters.cardsAsserter', function () {
         assert.deepEqual(err.context.cause.actual, [])
       }
     })
+
     it('should succeed on not existing card if has no arg and negated', async function () {
       await this.cardsAsserter.assertNotConvoStep({ convoStep: { stepTag: 'test' } })
     })
+
     it('should fail on card if has no arg and negated', async function () {
       try {
         await this.cardsAsserter.assertNotConvoStep({
@@ -208,6 +219,7 @@ describe('scripting.asserters.cardsAsserter', function () {
       }
     })
   })
+
   describe('cardsCountAsserter', function () {
     beforeEach(async function () {
       this.cardsCountAsserter = new CardsCountAsserter({}, {})

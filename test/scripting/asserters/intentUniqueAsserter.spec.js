@@ -20,6 +20,7 @@ describe('scripting.asserters.intentUniqueAsserter', function () {
       }
     })
   })
+
   it('positive case for intent unique asserter, with alternate', async function () {
     await asserter.assertConvoStep({
       convoStep: { stepTag: 'test' },
@@ -44,6 +45,7 @@ describe('scripting.asserters.intentUniqueAsserter', function () {
       }
     })
   })
+
   it('negative case for intent unique asserter, details', async function () {
     try {
       await asserter.assertConvoStep({

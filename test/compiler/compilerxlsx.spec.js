@@ -50,6 +50,7 @@ describe('compiler.compilerxlsx', function () {
       assert.equal(context.convos[1].conversation[1].messageText, 'test 2')
       assert.lengthOf(context.utterances, 0)
     })
+
     it('should read 2 convos and 2 utterances', async function () {
       const scriptBuffer = fs.readFileSync(path.resolve(__dirname, CONVOS_DIR, 'convos_2convos_2utterances.xlsx'))
       const context = buildContext()
@@ -72,6 +73,7 @@ describe('compiler.compilerxlsx', function () {
       assert.equal(context.utterances[0].name, 'TESTUTT1')
       assert.equal(context.utterances[1].name, 'TESTUTT2')
     })
+
     it('should read utterances from default worksheet', async function () {
       const scriptBuffer = fs.readFileSync(path.resolve(__dirname, CONVOS_DIR, 'convos_2utterances.xlsx'))
       const context = buildContext()
@@ -84,6 +86,7 @@ describe('compiler.compilerxlsx', function () {
       assert.lengthOf(context.convos, 0)
       assert.lengthOf(context.utterances, 2)
     })
+
     it('should read 2 utterances', async function () {
       const scriptBuffer = fs.readFileSync(path.resolve(__dirname, CONVOS_DIR, 'convos_2utterances.xlsx'))
       const context = buildContext()
@@ -99,6 +102,7 @@ describe('compiler.compilerxlsx', function () {
       assert.equal(context.utterances[0].name, 'TESTUTT1')
       assert.equal(context.utterances[1].name, 'TESTUTT2')
     })
+
     it('should read 2 utterances separated by empty lines', async function () {
       const scriptBuffer = fs.readFileSync(path.resolve(__dirname, CONVOS_DIR, 'convos_2utterances_emptylines.xlsx'))
       const context = buildContext()
@@ -116,6 +120,7 @@ describe('compiler.compilerxlsx', function () {
       assert.equal(context.utterances[1].name, 'TESTUTT2')
       assert.equal(context.utterances[1].utterances.length, 3)
     })
+
     it('should read 2 convos from given region by letter', async function () {
       const scriptBuffer = fs.readFileSync(path.resolve(__dirname, CONVOS_DIR, 'convos_2convos_middle.xlsx'))
       const context = buildContext()
@@ -133,6 +138,7 @@ describe('compiler.compilerxlsx', function () {
       assert.equal(context.convos[0].conversation[1].messageText, 'test 2')
       assert.lengthOf(context.utterances, 0)
     })
+
     it('should read 2 convos from given region by index', async function () {
       const scriptBuffer = fs.readFileSync(path.resolve(__dirname, CONVOS_DIR, 'convos_2convos_middle.xlsx'))
       const context = buildContext()
@@ -151,6 +157,7 @@ describe('compiler.compilerxlsx', function () {
       assert.lengthOf(context.utterances, 0)
     })
   })
+
   describe('negating', function () {
     it('should read ! as not', async function () {
       const scriptBuffer = fs.readFileSync(path.resolve(__dirname, CONVOS_DIR, 'convos_with_exclamation.xlsx'))
@@ -164,6 +171,7 @@ describe('compiler.compilerxlsx', function () {
       assert.equal(context.convos[0].conversation[1].messageText, 'test 2')
       assert.equal(context.convos[0].conversation[1].not, true)
     })
+
     it('should read !! as !', async function () {
       const scriptBuffer = fs.readFileSync(path.resolve(__dirname, CONVOS_DIR, 'convos_with_two_exclamation.xlsx'))
       const context = buildContext()
@@ -175,6 +183,7 @@ describe('compiler.compilerxlsx', function () {
       assert.equal(context.convos[0].conversation[1].messageText, '!test 2')
       assert.equal(context.convos[0].conversation[1].not, false)
     })
+
     it('should read n*! as (n-1)*!', async function () {
       const scriptBuffer = fs.readFileSync(path.resolve(__dirname, CONVOS_DIR, 'convos_with_four_exclamation.xlsx'))
       const context = buildContext()
@@ -187,6 +196,7 @@ describe('compiler.compilerxlsx', function () {
       assert.equal(context.convos[0].conversation[1].messageText, '!!!test 2')
       assert.equal(context.convos[0].conversation[1].not, false)
     })
+
     it('should read ! as ! in second line', async function () {
       const scriptBuffer = fs.readFileSync(path.resolve(__dirname, CONVOS_DIR, 'convos_with_exclamation_secline.xlsx'))
       const context = buildContext()
@@ -199,6 +209,7 @@ describe('compiler.compilerxlsx', function () {
       assert.equal(context.convos[0].conversation[1].not, true)
     })
   })
+
   describe('optional', function () {
     it('should read ? as optional', async function () {
       const scriptBuffer = fs.readFileSync(path.resolve(__dirname, CONVOS_DIR, 'convos_with_question.xlsx'))
@@ -212,6 +223,7 @@ describe('compiler.compilerxlsx', function () {
       assert.equal(context.convos[0].conversation[1].messageText, 'test 2')
       assert.equal(context.convos[0].conversation[1].optional, true)
     })
+
     it('should read ?? as ?', async function () {
       const scriptBuffer = fs.readFileSync(path.resolve(__dirname, CONVOS_DIR, 'convos_with_two_question.xlsx'))
       const context = buildContext()
@@ -223,6 +235,7 @@ describe('compiler.compilerxlsx', function () {
       assert.equal(context.convos[0].conversation[1].messageText, '?test 2')
       assert.equal(context.convos[0].conversation[1].optional, false)
     })
+
     it('should read n*? as (n-1)*?', async function () {
       const scriptBuffer = fs.readFileSync(path.resolve(__dirname, CONVOS_DIR, 'convos_with_four_question.xlsx'))
       const context = buildContext()
@@ -235,6 +248,7 @@ describe('compiler.compilerxlsx', function () {
       assert.equal(context.convos[0].conversation[1].messageText, '???test 2')
       assert.equal(context.convos[0].conversation[1].optional, false)
     })
+
     it('should read ? as ? in second line', async function () {
       const scriptBuffer = fs.readFileSync(path.resolve(__dirname, CONVOS_DIR, 'convos_with_question_secline.xlsx'))
       const context = buildContext()
@@ -247,6 +261,7 @@ describe('compiler.compilerxlsx', function () {
       assert.equal(context.convos[0].conversation[1].optional, true)
     })
   })
+
   describe('optional and negate', function () {
     it('should read ?! as optional and not', async function () {
       const scriptBuffer = fs.readFileSync(path.resolve(__dirname, CONVOS_DIR, 'convos_with_question_exclamation.xlsx'))
@@ -260,6 +275,7 @@ describe('compiler.compilerxlsx', function () {
       assert.equal(context.convos[0].conversation[1].optional, true)
       assert.equal(context.convos[0].conversation[1].not, true)
     })
+
     it('should read ??! as ?!', async function () {
       const scriptBuffer = fs.readFileSync(path.resolve(__dirname, CONVOS_DIR, 'convos_with_two_question_exclamation.xlsx'))
       const context = buildContext()
@@ -272,6 +288,7 @@ describe('compiler.compilerxlsx', function () {
       assert.equal(context.convos[0].conversation[1].not, false)
     })
   })
+
   describe('logichooks', function () {
     it('should accept logic hook if it is before message', async function () {
       const scriptBuffer = fs.readFileSync(path.resolve(__dirname, CONVOS_DIR, 'convos_logichook_after.xlsx'))
@@ -284,6 +301,7 @@ describe('compiler.compilerxlsx', function () {
       const convo = context.convos[0]
       assert.equal(convo.conversation[0].logicHooks.length, 1)
     })
+
     it('should throw error if logic hook is after message', async function () {
       const scriptBuffer = fs.readFileSync(path.resolve(__dirname, CONVOS_DIR, 'convos_logichook_before.xlsx'))
       const context = buildContextWithPause()
@@ -324,6 +342,7 @@ describe('compiler.compilerxlsx', function () {
     assert.equal(context.convos[3].conversation[1].messageText, 'test 4')
     assert.lengthOf(context.utterances, 0)
   })
+
   it('should read 2 convos and no utterances in simplified mode forced', async function () {
     const scriptBuffer = fs.readFileSync(path.resolve(__dirname, CONVOS_DIR, 'convos_2convos_simplified_to_force.xlsx'))
     const context = buildContext()
@@ -343,6 +362,7 @@ describe('compiler.compilerxlsx', function () {
     assert.equal(context.convos[1].conversation[1].messageText, 'test 4')
     assert.lengthOf(context.utterances, 0)
   })
+
   it('should sort convos by position in file', async function () {
     const scriptBuffer = fs.readFileSync(path.resolve(__dirname, CONVOS_DIR, 'convos_sortorder.xlsx'))
     const context = buildContext()
@@ -359,6 +379,7 @@ describe('compiler.compilerxlsx', function () {
     assert.equal(context.convos[3].header.name, 'Convos1-A011')
     assert.equal(context.convos[4].header.name, 'Convos1-A014')
   })
+
   it('should fail on intermixing q&a and convo sections', async function () {
     const scriptBuffer = fs.readFileSync(path.resolve(__dirname, CONVOS_DIR, 'convos_mix_qa_and_convos.xlsx'))
     const context = buildContext()
@@ -374,6 +395,7 @@ describe('compiler.compilerxlsx', function () {
       assert.isTrue(err.message.indexOf('Excel sheet "Convos1" invalid. Detected intermixed Q&A sections (for instance A5) and convo sections (for instance A2,B3)') >= 0)
     }
   })
+
   it('should read sheet names from filter with full match', async function () {
     const scriptBuffer = fs.readFileSync(path.resolve(__dirname, CONVOS_DIR, 'convos_sheetnames.xlsx'))
     const context = buildContext()
@@ -386,6 +408,7 @@ describe('compiler.compilerxlsx', function () {
     compiler.Compile(scriptBuffer, 'SCRIPTING_TYPE_CONVO')
     assert.lengthOf(context.convos, 2)
   })
+
   it('should read sheet names from filter with wildcard', async function () {
     const scriptBuffer = fs.readFileSync(path.resolve(__dirname, CONVOS_DIR, 'convos_sheetnames.xlsx'))
     const context = buildContext()
@@ -398,6 +421,7 @@ describe('compiler.compilerxlsx', function () {
     compiler.Compile(scriptBuffer, 'SCRIPTING_TYPE_CONVO')
     assert.lengthOf(context.convos, 3)
   })
+
   it('should read 3 convos with name', async function () {
     const scriptBuffer = fs.readFileSync(path.resolve(__dirname, CONVOS_DIR, 'convos_2convos_with_names.xlsx'))
     const context = buildContext()
@@ -422,6 +446,7 @@ describe('compiler.compilerxlsx', function () {
 
     assert.lengthOf(context.utterances, 0)
   })
+
   it('should read 3 convos with name (forced)', async function () {
     const scriptBuffer = fs.readFileSync(path.resolve(__dirname, CONVOS_DIR, 'convos_2convos_with_names_noheader.xlsx'))
     const context = buildContext()
@@ -448,6 +473,7 @@ describe('compiler.compilerxlsx', function () {
 
     assert.lengthOf(context.utterances, 0)
   })
+
   it('should read 3 convos without name (forced)', async function () {
     const scriptBuffer = fs.readFileSync(path.resolve(__dirname, CONVOS_DIR, 'convos_2convos_without_names.xlsx'))
     const context = buildContext()
@@ -473,6 +499,7 @@ describe('compiler.compilerxlsx', function () {
 
     assert.lengthOf(context.utterances, 0)
   })
+
   it('should read 3 convos without name (forced) 2', async function () {
     const scriptBuffer = fs.readFileSync(path.resolve(__dirname, CONVOS_DIR, 'convos_2convos_without_names_noheader.xlsx'))
     const context = buildContext()

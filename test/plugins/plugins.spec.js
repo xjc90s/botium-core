@@ -39,6 +39,7 @@ describe('plugins.plugins', function () {
       const response = await container.WaitBotSays()
       assert.equal(response.messageText, 'TEST')
     })
+
     it('should map simple function from file to class', async function () {
       const myCaps = {
         [Capabilities.PROJECTNAME]: 'plugins.load',
@@ -52,6 +53,7 @@ describe('plugins.plugins', function () {
       const response = await container.WaitBotSays()
       assert.equal(response.messageText, 'TEST')
     })
+
     it('should use UserSays function from module as class', async function () {
       const myCaps = {
         [Capabilities.PROJECTNAME]: 'plugins.load',
@@ -65,6 +67,7 @@ describe('plugins.plugins', function () {
       const response = await container.WaitBotSays()
       assert.equal(response.messageText, 'MYPREFIX:TEST')
     })
+
     it('should use UserSays function from file as class', async function () {
       const myCaps = {
         [Capabilities.PROJECTNAME]: 'plugins.load',
