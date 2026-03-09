@@ -34,6 +34,7 @@ describe('scripting.asserters.jsonPathAsserter', function () {
           }
         })
       })
+
       it('should succeed if null', async function () {
         await this.jsonPathAsserterEquals.assertConvoStep({
           convoStep: { stepTag: 'test' },
@@ -45,6 +46,7 @@ describe('scripting.asserters.jsonPathAsserter', function () {
           }
         })
       })
+
       it('should succeed if expected is empty, and asserter is negated', async function () {
         await this.jsonPathAsserterEquals.assertNotConvoStep({
           convoStep: { stepTag: 'test' },
@@ -56,6 +58,7 @@ describe('scripting.asserters.jsonPathAsserter', function () {
           }
         })
       })
+
       it('should fail if expected is not empty', async function () {
         try {
           await this.jsonPathAsserterWildcard.assertConvoStep({
@@ -72,6 +75,7 @@ describe('scripting.asserters.jsonPathAsserter', function () {
           assert.isTrue(err.message.includes('Expected: "something but not empty string" in jsonPath $.test, actual: <empty>'))
         }
       })
+
       it('should fail if real is not empty', async function () {
         try {
           await this.jsonPathAsserterEquals.assertConvoStep({
@@ -93,6 +97,7 @@ describe('scripting.asserters.jsonPathAsserter', function () {
     it('should do nothing on no arg', async function () {
       await this.jsonPathAsserter.assertConvoStep({})
     })
+
     it('should succeed on existing jsonpath', async function () {
       await this.jsonPathAsserter.assertConvoStep({
         convoStep: { stepTag: 'test' },
@@ -104,6 +109,7 @@ describe('scripting.asserters.jsonPathAsserter', function () {
         }
       })
     })
+
     it('should succeed on any existing jsonpath', async function () {
       await this.jsonPathAsserter.assertConvoStep({
         convoStep: { stepTag: 'test' },
@@ -119,6 +125,7 @@ describe('scripting.asserters.jsonPathAsserter', function () {
         }
       })
     })
+
     it('should fail on not any existing jsonpath', async function () {
       try {
         await this.jsonPathAsserter.assertConvoStep({
@@ -138,6 +145,7 @@ describe('scripting.asserters.jsonPathAsserter', function () {
         assert.isTrue(err.message.includes('Expected: "message4" in jsonPath $.messages[*].label, actual: message1,message2,message3'))
       }
     })
+
     it('should fail on not existing jsonpath', async function () {
       try {
         await this.jsonPathAsserter.assertConvoStep({
@@ -152,6 +160,7 @@ describe('scripting.asserters.jsonPathAsserter', function () {
         assert.isTrue(err.message.includes('Could not find any element in jsonPath $.test'))
       }
     })
+
     it('should succeed on matching jsonpath', async function () {
       await this.jsonPathAsserter.assertConvoStep({
         convoStep: { stepTag: 'test' },
@@ -163,6 +172,7 @@ describe('scripting.asserters.jsonPathAsserter', function () {
         }
       })
     })
+
     it('should succeed on matching jsonpath array', async function () {
       await this.jsonPathAsserter.assertConvoStep({
         convoStep: { stepTag: 'test' },
@@ -174,6 +184,7 @@ describe('scripting.asserters.jsonPathAsserter', function () {
         }
       })
     })
+
     it('should succeed on jsonpath object', async function () {
       await this.jsonPathAsserterWildcard.assertConvoStep({
         convoStep: { stepTag: 'test' },
@@ -189,6 +200,7 @@ describe('scripting.asserters.jsonPathAsserter', function () {
         }
       })
     })
+
     it('should fail on invalid jsonpath object', async function () {
       try {
         await this.jsonPathAsserterWildcard.assertConvoStep({
@@ -235,6 +247,7 @@ describe('scripting.asserters.jsonPathAsserter', function () {
         assert.equal(err.context.cause.actual, 'test1')
       }
     })
+
     it('should succeed on non existing jsonpath', async function () {
       await this.jsonPathAsserter.assertNotConvoStep({
         convoStep: { stepTag: 'test' },
@@ -244,6 +257,7 @@ describe('scripting.asserters.jsonPathAsserter', function () {
         }
       })
     })
+
     it('should succeed on non matching jsonpath', async function () {
       await this.jsonPathAsserter.assertNotConvoStep({
         convoStep: { stepTag: 'test' },
@@ -255,6 +269,7 @@ describe('scripting.asserters.jsonPathAsserter', function () {
         }
       })
     })
+
     it('should fail on matching jsonpath', async function () {
       try {
         await this.jsonPathAsserter.assertNotConvoStep({
@@ -287,6 +302,7 @@ describe('scripting.asserters.jsonPathAsserter', function () {
         }
       })
     })
+
     it('should succeed on matching jsonpath from globalArgs', async function () {
       await this.jsonPathAsserterGlobalArgs.assertConvoStep({
         convoStep: { stepTag: 'test' },
@@ -298,6 +314,7 @@ describe('scripting.asserters.jsonPathAsserter', function () {
         }
       })
     })
+
     it('should fail on not existing jsonpath from globalArgs', async function () {
       try {
         await this.jsonPathAsserterGlobalArgs.assertConvoStep({
@@ -311,6 +328,7 @@ describe('scripting.asserters.jsonPathAsserter', function () {
         assert.isTrue(err.message.includes('Could not find any element in jsonPath $.test'))
       }
     })
+
     it('should fail on not matching jsonpath from globalArgs', async function () {
       try {
         await this.jsonPathAsserterGlobalArgs.assertConvoStep({
@@ -353,6 +371,7 @@ describe('scripting.asserters.jsonPathAsserter', function () {
         assert.isTrue(err.message.indexOf('0 arguments expected') > 0)
       }
     })
+
     it('should succeed on existing jsonpath from pathPattern', async function () {
       this.jsonPathAsserter.globalArgs = {
         argCount: 1,
@@ -369,6 +388,7 @@ describe('scripting.asserters.jsonPathAsserter', function () {
         }
       })
     })
+
     it('should succeed on existing jsonpath from pathPattern and assertPattern', async function () {
       this.jsonPathAsserter.globalArgs = {
         argCount: 2,
@@ -386,6 +406,7 @@ describe('scripting.asserters.jsonPathAsserter', function () {
         }
       })
     })
+
     it('should fail on not matching jsonpath from pathPattern and assertPattern', async function () {
       this.jsonPathAsserter.globalArgs = {
         argCount: 2,
@@ -407,6 +428,7 @@ describe('scripting.asserters.jsonPathAsserter', function () {
         assert.isTrue(err.message.indexOf('Expected: "value" in jsonPath $.test') > 0)
       }
     })
+
     it('should succeed on setting matching mode in global args', async function () {
       this.jsonPathAsserter.globalArgs = {
         argCount: 2,
@@ -425,6 +447,7 @@ describe('scripting.asserters.jsonPathAsserter', function () {
         }
       })
     })
+
     it('should fail on setting matching mode in global args', async function () {
       this.jsonPathAsserter.globalArgs = {
         argCount: 2,
@@ -481,6 +504,7 @@ describe('scripting.asserters.jsonPathAsserter', function () {
         }
       })
     })
+
     it('should succeed on <=2 with two jsonpath', async function () {
       await this.jsonPathCountAsserter.assertConvoStep({
         convoStep: { stepTag: 'test' },
@@ -492,6 +516,7 @@ describe('scripting.asserters.jsonPathAsserter', function () {
         }
       })
     })
+
     it('should fail on >2 with two jsonpath', async function () {
       try {
         await this.jsonPathCountAsserter.assertConvoStep({

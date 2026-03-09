@@ -41,6 +41,7 @@ describe('compiler.compilertxt', function () {
     compiler.Compile(scriptBuffer, 'SCRIPTING_TYPE_CONVO')
     assert.equal(context.convos[0].conversation.length, 0)
   })
+
   it('should read ! as not', async function () {
     const scriptBuffer = fs.readFileSync(path.resolve(__dirname, CONVOS_DIR, 'convos_with_exclamation.convo.txt'))
     const context = buildContext()
@@ -53,6 +54,7 @@ describe('compiler.compilertxt', function () {
     assert.equal(context.convos[0].conversation[1].messageText, 'test 2')
     assert.equal(context.convos[0].conversation[1].not, true)
   })
+
   it('should read !! as !', async function () {
     const scriptBuffer = fs.readFileSync(path.resolve(__dirname, CONVOS_DIR, 'convos_with_two_exclamation.convo.txt'))
     const context = buildContext()
@@ -64,6 +66,7 @@ describe('compiler.compilertxt', function () {
     assert.equal(context.convos[0].conversation[1].messageText, '!test 2')
     assert.equal(context.convos[0].conversation[1].not, false)
   })
+
   it('should read n*! as (n-1)*!', async function () {
     const scriptBuffer = fs.readFileSync(path.resolve(__dirname, CONVOS_DIR, 'convos_with_four_exclamation.convo.txt'))
     const context = buildContext()
@@ -76,6 +79,7 @@ describe('compiler.compilertxt', function () {
     assert.equal(context.convos[0].conversation[1].messageText, '!!!test 2')
     assert.equal(context.convos[0].conversation[1].not, false)
   })
+
   it('should read ! as ! in second line', async function () {
     const scriptBuffer = fs.readFileSync(path.resolve(__dirname, CONVOS_DIR, 'convos_with_exclamation_secline.convo.txt'))
     const context = buildContext()
@@ -87,6 +91,7 @@ describe('compiler.compilertxt', function () {
     assert.equal(context.convos[0].conversation[1].messageText, 'test 2\n!test 2')
     assert.equal(context.convos[0].conversation[1].not, true)
   })
+
   it('should read ? as optional', async function () {
     const scriptBuffer = fs.readFileSync(path.resolve(__dirname, CONVOS_DIR, 'convos_with_question.convo.txt'))
     const context = buildContext()
@@ -99,6 +104,7 @@ describe('compiler.compilertxt', function () {
     assert.equal(context.convos[0].conversation[1].messageText, 'test 2')
     assert.equal(context.convos[0].conversation[1].optional, true)
   })
+
   it('should read ?? as ?', async function () {
     const scriptBuffer = fs.readFileSync(path.resolve(__dirname, CONVOS_DIR, 'convos_with_two_question.convo.txt'))
     const context = buildContext()
@@ -110,6 +116,7 @@ describe('compiler.compilertxt', function () {
     assert.equal(context.convos[0].conversation[1].messageText, '?test 2')
     assert.equal(context.convos[0].conversation[1].optional, false)
   })
+
   it('should read ?! as optional and not', async function () {
     const scriptBuffer = fs.readFileSync(path.resolve(__dirname, CONVOS_DIR, 'convos_with_question_exclamation.convo.txt'))
     const context = buildContext()
@@ -123,6 +130,7 @@ describe('compiler.compilertxt', function () {
     assert.equal(context.convos[0].conversation[1].not, true)
     assert.equal(context.convos[0].conversation[1].optional, true)
   })
+
   it('should read ??! as ?!', async function () {
     const scriptBuffer = fs.readFileSync(path.resolve(__dirname, CONVOS_DIR, 'convos_with_two_question_exclamation.convo.txt'))
     const context = buildContext()
@@ -136,6 +144,7 @@ describe('compiler.compilertxt', function () {
     assert.equal(context.convos[0].conversation[1].not, false)
     assert.equal(context.convos[0].conversation[1].optional, false)
   })
+
   it('should read n*? as (n-1)*?', async function () {
     const scriptBuffer = fs.readFileSync(path.resolve(__dirname, CONVOS_DIR, 'convos_with_four_question.convo.txt'))
     const context = buildContext()
@@ -148,6 +157,7 @@ describe('compiler.compilertxt', function () {
     assert.equal(context.convos[0].conversation[1].messageText, '???test 2')
     assert.equal(context.convos[0].conversation[1].optional, false)
   })
+
   it('should read ? as ? in second line', async function () {
     const scriptBuffer = fs.readFileSync(path.resolve(__dirname, CONVOS_DIR, 'convos_with_question_secline.convo.txt'))
     const context = buildContext()
@@ -159,6 +169,7 @@ describe('compiler.compilertxt', function () {
     assert.equal(context.convos[0].conversation[1].messageText, 'test 2\n?test 2')
     assert.equal(context.convos[0].conversation[1].optional, true)
   })
+
   it('should allow text starting with ##', async function () {
     const scriptBuffer = fs.readFileSync(path.resolve(__dirname, CONVOS_DIR, 'convos_with_hashmark.convo.txt'))
     const context = buildContext()
@@ -184,6 +195,7 @@ describe('compiler.compilertxt', function () {
     assert.equal(convo.conversation[0].messageText, 'Hallo\n\nHallo2')
     assert.equal(convo.conversation[1].messageText, 'Hallo\n\nHallo2')
   })
+
   it('should read msg if there is just text', async function () {
     const scriptBuffer = fs.readFileSync(path.resolve(__dirname, CONVOS_DIR, 'convos_emptyrow_just_text.convo.txt'))
     const context = buildContext()
@@ -197,6 +209,7 @@ describe('compiler.compilertxt', function () {
     assert.equal(convo.conversation[0].messageText, 'Hello')
     assert.equal(convo.conversation[1].messageText, 'Hi')
   })
+
   it('should read msg if there is just text, even if it is not separated by newline', async function () {
     const scriptBuffer = fs.readFileSync(path.resolve(__dirname, CONVOS_DIR, 'convos_emptyrow_just_text_no_separator_row.convo.txt'))
     const context = buildContext()
@@ -210,6 +223,7 @@ describe('compiler.compilertxt', function () {
     assert.equal(convo.conversation[0].messageText, 'Hello')
     assert.equal(convo.conversation[1].messageText, 'Hi')
   })
+
   it('should read nothing if there is nothing', async function () {
     const scriptBuffer = fs.readFileSync(path.resolve(__dirname, CONVOS_DIR, 'convos_emptyrow_empty.convo.txt'))
     const context = buildContext()
@@ -224,6 +238,7 @@ describe('compiler.compilertxt', function () {
     assert.equal(convo.conversation[0].logicHooks.length, 0)
     assert.equal(convo.conversation[1].messageText, 'Hi')
   })
+
   it('should read empty row if there are at least 2 empty rows', async function () {
     const scriptBuffer = fs.readFileSync(path.resolve(__dirname, CONVOS_DIR, 'convos_emptyrow_just_emptyrow.convo.txt'))
     const context = buildContext()
@@ -238,6 +253,7 @@ describe('compiler.compilertxt', function () {
     assert.equal(convo.conversation[0].logicHooks.length, 0)
     assert.equal(convo.conversation[1].messageText, 'Hi ')
   })
+
   it('should read nothing if there is nothing (even no separator)', async function () {
     const scriptBuffer = fs.readFileSync(path.resolve(__dirname, CONVOS_DIR, 'convos_emptyrow_no_separator_row.convo.txt'))
     const context = buildContext()
@@ -286,6 +302,7 @@ describe('compiler.compilertxt', function () {
       assert.equal(convo.conversation[0].logicHooks.length, 1)
       assert.equal(convo.conversation[1].messageText, 'Hi')
     })
+
     it('should read logicHook if there is just logicHook, even if it is not separated by newline', async function () {
       const scriptBuffer = fs.readFileSync(path.resolve(__dirname, CONVOS_DIR, 'convos_emptyrow_just_asserter_no_separator_row.convo.txt'))
       const context = buildContextWithPause()
@@ -300,6 +317,7 @@ describe('compiler.compilertxt', function () {
       assert.equal(convo.conversation[0].logicHooks.length, 1)
       assert.equal(convo.conversation[1].messageText, 'Hi')
     })
+
     it('should throw error if there is message after logichook', async function () {
       const scriptBuffer = fs.readFileSync(path.resolve(__dirname, CONVOS_DIR, 'convos_emptyrow_text_after_logichook.convo.txt'))
       const context = buildContextWithPause()
@@ -313,6 +331,7 @@ describe('compiler.compilertxt', function () {
         assert.equal(err.message, 'Failed to parse conversation. No text expected here: \'Hi!\' in convo:\n PAUSE 100\nHi!\n')
       }
     })
+
     it('should consider modificator for asserter', async function () {
       const scriptBuffer = fs.readFileSync(path.resolve(__dirname, CONVOS_DIR, 'convos_asserter_modificator.convo.txt'))
       const context = buildContextWithPause()
@@ -326,6 +345,7 @@ describe('compiler.compilertxt', function () {
       assert.equal(convo.conversation[0].asserters.length, 1)
       assert.deepEqual(convo.conversation[0].asserters[0], { name: 'BUTTONS', args: ['Test1', 'Test2'], not: true, optional: false })
     })
+
     it('should allow escape pipe for args', async function () {
       const scriptBuffer = fs.readFileSync(path.resolve(__dirname, CONVOS_DIR, 'convos_args_escape.convo.txt'))
       const context = buildContextWithPause()
@@ -339,6 +359,7 @@ describe('compiler.compilertxt', function () {
       assert.equal(convo.conversation[0].asserters.length, 1)
       assert.deepEqual(convo.conversation[0].asserters[0], { name: 'BUTTONS', args: ['Test|1', 'Test|2'], not: false, optional: false })
     })
+
     it('should read file with mixed new line characters', async function () {
       const scriptBuffer = fs.readFileSync(path.resolve(__dirname, CONVOS_DIR, 'convos_mixed_new_line_characters.convo.txt'))
       const context = buildContext()

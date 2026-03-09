@@ -29,6 +29,7 @@ describe('compiler.precompiler.json', function () {
     this.compiler = driver.BuildCompiler()
     this.container = await driver.Build()
   })
+
   afterEach(async function () {
     this.container && await this.container.Clean()
   })

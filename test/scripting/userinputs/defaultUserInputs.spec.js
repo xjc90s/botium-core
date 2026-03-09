@@ -17,6 +17,7 @@ describe('scripting.userinputs.defaultUserInputs', function () {
         meMsg: {}
       })
     })
+
     it('wrong number of args', async function () {
       const bi = new ButtonInput()
       try {
@@ -31,6 +32,7 @@ describe('scripting.userinputs.defaultUserInputs', function () {
         assert.instanceOf(err, Error)
       }
     })
+
     it('empty argument list', async function () {
       const bi = new ButtonInput()
       try {
@@ -44,6 +46,7 @@ describe('scripting.userinputs.defaultUserInputs', function () {
         assert.instanceOf(err, Error)
       }
     })
+
     it('should set button in message as payload', async function () {
       const bi = new ButtonInput()
 
@@ -69,6 +72,7 @@ describe('scripting.userinputs.defaultUserInputs', function () {
         convo: { sourceTag: { filename: '' } }
       })
     })
+
     it('correct number of args with buffer', async function () {
       const mi = new MediaInput()
       await mi.setUserInput({
@@ -78,6 +82,7 @@ describe('scripting.userinputs.defaultUserInputs', function () {
         convo: { sourceTag: { filename: '' } }
       })
     })
+
     it('wrong number of args', async function () {
       const mi = new MediaInput()
       return mi.setUserInput({
@@ -91,6 +96,7 @@ describe('scripting.userinputs.defaultUserInputs', function () {
           assert.instanceOf(err, Error)
         })
     })
+
     it('empty argument list', async function () {
       const mi = new MediaInput()
       return mi.setUserInput({
@@ -103,6 +109,7 @@ describe('scripting.userinputs.defaultUserInputs', function () {
           assert.instanceOf(err, Error)
         })
     })
+
     it('should set media in message', async function () {
       const mi = new MediaInput({}, { SECURITY_ALLOW_UNSAFE: true })
 
@@ -134,6 +141,7 @@ describe('scripting.userinputs.defaultUserInputs', function () {
         convo: { sourceTag: { filename: '' } }
       })
     })
+
     it('wrong number of args', async function () {
       const mi = new FormInput()
       return mi.setUserInput({
@@ -147,6 +155,7 @@ describe('scripting.userinputs.defaultUserInputs', function () {
           assert.instanceOf(err, Error)
         })
     })
+
     it('empty argument list', async function () {
       const mi = new FormInput()
       return mi.setUserInput({
@@ -159,6 +168,7 @@ describe('scripting.userinputs.defaultUserInputs', function () {
           assert.instanceOf(err, Error)
         })
     })
+
     it('should set form boolean in message', async function () {
       const mi = new FormInput()
 
@@ -179,6 +189,7 @@ describe('scripting.userinputs.defaultUserInputs', function () {
       assert.equal(meMsg.forms[0].name, 'NAME1')
       assert.isTrue(meMsg.forms[0].value)
     })
+
     it('should set form value in message', async function () {
       const mi = new FormInput()
 
@@ -199,6 +210,7 @@ describe('scripting.userinputs.defaultUserInputs', function () {
       assert.equal(meMsg.forms[0].name, 'NAME1')
       assert.equal(meMsg.forms[0].value, 'VALUE1')
     })
+
     it('should set form values in message', async function () {
       const mi = new FormInput()
 
@@ -222,6 +234,7 @@ describe('scripting.userinputs.defaultUserInputs', function () {
       assert.equal(meMsg.forms[0].value[0], 'VALUE1')
       assert.equal(meMsg.forms[0].value[1], 'VALUE2')
     })
+
     it('should set multiple form value in message', async function () {
       const mi = new FormInput()
 

@@ -11,6 +11,7 @@ describe('scripting.asserters.responseLengthAsserter', function () {
   it('should do nothing on no arg', async function () {
     await this.responseLengthAsserter.assertConvoStep({ })
   })
+
   it('should succeed on short text', async function () {
     await this.responseLengthAsserter.assertConvoStep({
       convoStep: { stepTag: 'test' },
@@ -20,6 +21,7 @@ describe('scripting.asserters.responseLengthAsserter', function () {
       }
     })
   })
+
   it('should succeed on short texts', async function () {
     await this.responseLengthAsserter.assertConvoStep({
       convoStep: { stepTag: 'test' },
@@ -32,6 +34,7 @@ describe('scripting.asserters.responseLengthAsserter', function () {
       }
     })
   })
+
   it('should fail on long text', async function () {
     try {
       await this.responseLengthAsserter.assertConvoStep({
@@ -50,6 +53,7 @@ describe('scripting.asserters.responseLengthAsserter', function () {
       assert.equal(err.context.cause.actual, 35)
     }
   })
+
   it('should fail on lots of texts', async function () {
     try {
       await this.responseLengthAsserter.assertConvoStep({

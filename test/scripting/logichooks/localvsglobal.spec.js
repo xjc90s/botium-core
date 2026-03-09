@@ -79,6 +79,7 @@ describe('Using local and global hooks together', function () {
     assert.equal(localAssertionCount, 1)
     assert.equal(globalAssertionCount, 1)
   })
+
   it('should use local and global logic hooks', async function () {
     let localHookCount = 0
     let globalHookCount = 0

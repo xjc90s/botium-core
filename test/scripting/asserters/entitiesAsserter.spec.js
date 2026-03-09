@@ -110,6 +110,7 @@ describe('scripting.asserters.entitiesAsserter', function () {
       { product: -1 }
     )
   })
+
   it('expected 1... entities, found 3 other enitities, should fail', async function () {
     return _assert(
       ['product', '...'],

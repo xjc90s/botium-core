@@ -21,6 +21,7 @@ describe('scripting.asserters.formsAsserter', function () {
       }
     })
   })
+
   it('should succeed on existing card form', async function () {
     await this.formsAsserter.assertConvoStep({
       convoStep: { stepTag: 'test' },
@@ -38,6 +39,7 @@ describe('scripting.asserters.formsAsserter', function () {
       }
     })
   })
+
   it('should succeed on existing card forms', async function () {
     await this.formsAsserter.assertConvoStep({
       convoStep: { stepTag: 'test' },
@@ -60,6 +62,7 @@ describe('scripting.asserters.formsAsserter', function () {
       }
     })
   })
+
   it('should succeed on existing card form (by label)', async function () {
     await this.formsAsserter.assertConvoStep({
       convoStep: { stepTag: 'test' },
@@ -77,6 +80,7 @@ describe('scripting.asserters.formsAsserter', function () {
       }
     })
   })
+
   it('should fail on missing form', async function () {
     try {
       await this.formsAsserter.assertConvoStep({
@@ -102,6 +106,7 @@ describe('scripting.asserters.formsAsserter', function () {
       assert.deepEqual(err.context.cause.diff, ['test2'])
     }
   })
+
   it('should succeed on not existing form', async function () {
     await this.formsAsserter.assertNotConvoStep({
       convoStep: { stepTag: 'test' },
@@ -115,6 +120,7 @@ describe('scripting.asserters.formsAsserter', function () {
       }
     })
   })
+
   it('should fail on unexpected form', async function () {
     try {
       await this.formsAsserter.assertNotConvoStep({
@@ -140,6 +146,7 @@ describe('scripting.asserters.formsAsserter', function () {
       assert.deepEqual(err.context.cause.diff, ['test1'])
     }
   })
+
   it('should succeed on existing form if has no arg', async function () {
     await this.formsAsserter.assertConvoStep({
       convoStep: { stepTag: 'test' },
@@ -153,6 +160,7 @@ describe('scripting.asserters.formsAsserter', function () {
       }
     })
   })
+
   it('should fail on no form if has no arg', async function () {
     try {
       await this.formsAsserter.assertConvoStep({ convoStep: { stepTag: 'test' } })
@@ -167,9 +175,11 @@ describe('scripting.asserters.formsAsserter', function () {
       assert.deepEqual(err.context.cause.actual, [])
     }
   })
+
   it('should succeed on not existing form if has no arg and negated', async function () {
     await this.formsAsserter.assertNotConvoStep({ convoStep: { stepTag: 'test' } })
   })
+
   it('should fail on form if has no arg and negated', async function () {
     try {
       await this.formsAsserter.assertNotConvoStep({
