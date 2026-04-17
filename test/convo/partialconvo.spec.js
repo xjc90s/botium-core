@@ -66,6 +66,7 @@ describe('convo.partialconvo', function () {
       assert.equal(transcript.steps[7].actual.sender, 'bot')
       assert.equal(transcript.steps[7].actual.messageText, 'You are logged out!')
     })
+
     it('Depth1 xls, everything ok', async function () {
       await _initIt([
         'Password please!',
@@ -96,6 +97,7 @@ describe('convo.partialconvo', function () {
       assert.equal(transcript.steps[7].actual.sender, 'bot')
       assert.equal(transcript.steps[7].actual.messageText, 'You are logged out!')
     })
+
     it('Depth1 csv, everything ok', async function () {
       await _initIt([
         'Password please!',
@@ -126,6 +128,7 @@ describe('convo.partialconvo', function () {
       assert.equal(transcript.steps[7].actual.sender, 'bot')
       assert.equal(transcript.steps[7].actual.messageText, 'You are logged out!')
     })
+
     it('Wrong botsays in main convo', async function () {
       await _initIt([
         'Password please!',

@@ -126,6 +126,7 @@ describe('scripting.logichooks.global.setClearScriptingMemory', function () {
         assert.isTrue(err.message.indexOf('Bot response (on Line 6: #me - sending input: $input) "sending input: OUTPUT1" expected to match "sending input: INPUT1"') >= 0)
       }
     })
+
     it('should overwrite scripting memory and use for assertions', async function () {
       this.compiler.ReadScript(path.resolve(__dirname, 'convos'), 'scripting_memory_overwrite_and_check.convo.txt')
       try {
@@ -139,6 +140,7 @@ describe('scripting.logichooks.global.setClearScriptingMemory', function () {
         assert.equal(err.transcript.steps[3].scriptingMemory.$myvar, 'VARVALUE1')
       }
     })
+
     it('should be assigned from jsonpath', async function () {
       this.compiler.ReadScript(path.resolve(__dirname, 'convos'), 'scripting_memory_from_jsonpath.convo.txt')
       assert.equal(this.compiler.convos.length, 1)
@@ -148,6 +150,7 @@ describe('scripting.logichooks.global.setClearScriptingMemory', function () {
       assert.isDefined(transcript.scriptingMemory.$cardcontent)
       assert.equal(transcript.scriptingMemory.$cardcontent, 'card content')
     })
+
     it('should fail on invalid jsonpath', async function () {
       this.compiler.ReadScript(path.resolve(__dirname, 'convos'), 'scripting_memory_from_invalidjsonpath.convo.txt')
       try {

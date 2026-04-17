@@ -54,6 +54,7 @@ describe('convo with custom conditional logichook', function () {
       this.container = container
       await this.container.Start()
     })
+
     afterEach(async function () {
       await this.container.Stop()
       await this.container.Clean()
@@ -79,6 +80,7 @@ describe('convo with custom conditional logichook', function () {
       this.container = container
       await this.container.Start()
     })
+
     afterEach(async function () {
       await this.container.Stop()
       await this.container.Clean()

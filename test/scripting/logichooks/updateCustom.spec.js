@@ -115,6 +115,7 @@ describe('UpdateCustomLogicHook', function () {
 
     await this.compiler.convos[0].Run(this.container)
   })
+
   it('should update me message from begin section skalar', async function () {
     const myCaps = {
       [Capabilities.PROJECTNAME]: 'scripting.logichooks',
@@ -130,6 +131,7 @@ describe('UpdateCustomLogicHook', function () {
 
     await this.compiler.convos[0].Run(this.container)
   })
+
   it('should update me message from begin section in partial convo', async function () {
     const myCaps = {
       [Capabilities.PROJECTNAME]: 'scripting.logichooks',

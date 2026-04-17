@@ -47,6 +47,7 @@ describe('scripting.asserters.convoStepParametersForAssert', function () {
     this.compiler = driver.BuildCompiler()
     this.container = await driver.Build()
   })
+
   afterEach(async function () {
     await this.container.Stop()
     await this.container.Clean()
@@ -64,6 +65,7 @@ describe('scripting.asserters.convoStepParametersForAssert', function () {
         assert.isTrue(err.message.indexOf('"You said Hello" expected to match "Hello"') >= 0)
       }
     })
+
     it('should not accept bad chatbot response on exact match defined on step even with WER asserter', async function () {
       this.compiler.ReadScript(path.resolve(__dirname, 'convos'), 'convo_step_parameter_matchmode_failed_wer.convo.txt')
       assert.equal(this.compiler.convos.length, 1)
@@ -84,36 +86,42 @@ describe('scripting.asserters.convoStepParametersForAssert', function () {
 
       await this.compiler.convos[0].Run(this.container)
     })
+
     it('should skip optional bot message', async function () {
       this.compiler.ReadScript(path.resolve(__dirname, 'convos'), 'convo_step_parameter_optional_with_timeout.convo.txt')
       assert.equal(this.compiler.convos.length, 1)
 
       await this.compiler.convos[0].Run(this.container)
     })
+
     it('should retry until succesful asserters', async function () {
       this.compiler.ReadScript(path.resolve(__dirname, 'convos'), 'convo_step_parameter_retry_asserters_good.convo.txt')
       assert.equal(this.compiler.convos.length, 1)
 
       await this.compiler.convos[0].Run(this.container)
     })
+
     it('should retry until succesful asserters all', async function () {
       this.compiler.ReadScript(path.resolve(__dirname, 'convos'), 'convo_step_parameter_retry_asserters_all_good.convo.txt')
       assert.equal(this.compiler.convos.length, 1)
 
       await this.compiler.convos[0].Run(this.container)
     })
+
     it('should retry until succesful main, configured in begin', async function () {
       this.compiler.ReadScript(path.resolve(__dirname, 'convos'), 'convo_step_parameter_retry_main_good_begin.convo.txt')
       assert.equal(this.compiler.convos.length, 1)
 
       await this.compiler.convos[0].Run(this.container)
     })
+
     it('should retry until succesful asserters, configured by cap', async function () {
       this.compiler.ReadScript(path.resolve(__dirname, 'convos'), 'convo_step_parameter_retry_asserters_good_global.convo.txt')
       assert.equal(this.compiler.convos.length, 1)
 
       await this.compiler.convos[0].Run(this.container)
     })
+
     it('should retry until timeout main', async function () {
       this.compiler.ReadScript(path.resolve(__dirname, 'convos'), 'convo_step_parameter_retry_main_botium_timeout.convo.txt')
       assert.equal(this.compiler.convos.length, 1)
@@ -125,6 +133,7 @@ describe('scripting.asserters.convoStepParametersForAssert', function () {
         assert.isTrue(err.message.indexOf('error waiting for bot - Bot did not respond within 1s') >= 0)
       }
     })
+
     it('should retry until timeout asserter', async function () {
       this.compiler.ReadScript(path.resolve(__dirname, 'convos'), 'convo_step_parameter_retry_asserters_botium_timeout.convo.txt')
       assert.equal(this.compiler.convos.length, 1)
@@ -136,6 +145,7 @@ describe('scripting.asserters.convoStepParametersForAssert', function () {
         assert.isTrue(err.message.indexOf('error waiting for bot - Bot did not respond within 1s') >= 0)
       }
     })
+
     it('should not retry on not retriable error', async function () {
       this.compiler.ReadScript(path.resolve(__dirname, 'convos'), 'convo_step_parameter_retry_main_but_no_button.convo.txt')
       assert.equal(this.compiler.convos.length, 1)
@@ -147,6 +157,7 @@ describe('scripting.asserters.convoStepParametersForAssert', function () {
         assert.isTrue(err.message.indexOf('Expected button(s) with text "some not existing button"') >= 0)
       }
     })
+
     it('should retry until every retriable is succesful', async function () {
       this.compiler.ReadScript(path.resolve(__dirname, 'convos'), 'convo_step_parameter_retry_main_and_asserter.convo.txt')
       assert.equal(this.compiler.convos.length, 1)

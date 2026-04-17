@@ -31,18 +31,21 @@ describe('scripting.asserters.textAsserter', function () {
         assert.deepEqual(actual, EXPECTED_SINGLE)
       })
     })
+
     it('global and json', async function () {
       const actual = flatCababilities({
         PRECOMP: ACTUAL_SINGLE
       }, 'PRECOMP')
       assert.deepEqual(actual, EXPECTED_SINGLE)
     })
+
     it('global and jsonstring', async function () {
       const actual = flatCababilities({
         PRECOMP: JSON.stringify(ACTUAL_SINGLE)
       }, 'PRECOMP')
       assert.deepEqual(actual, EXPECTED_SINGLE)
     })
+
     describe('multiple precompilers', function () {
       it('suffix', async function () {
         const actual = flatCababilities({
@@ -53,6 +56,7 @@ describe('scripting.asserters.textAsserter', function () {
         }, 'PRECOMP')
         assert.deepEqual(actual, EXPECTED)
       })
+
       it('suffix and json', async function () {
         const actual = flatCababilities({
           'PRECOMP.0': {
@@ -66,12 +70,14 @@ describe('scripting.asserters.textAsserter', function () {
         }, 'PRECOMP')
         assert.deepEqual(actual, EXPECTED)
       })
+
       it('global and array', async function () {
         const actual = flatCababilities({
           PRECOMP: ACTUAL
         }, 'PRECOMP')
         assert.deepEqual(actual, EXPECTED)
       })
+
       it('global and arraystring', async function () {
         const actual = flatCababilities({
           PRECOMP: JSON.stringify(ACTUAL)
@@ -80,6 +86,7 @@ describe('scripting.asserters.textAsserter', function () {
       })
     })
   })
+
   describe('key types', function () {
     it('prefix is shorter', async function () {
       const actual = flatCababilities({
@@ -87,6 +94,7 @@ describe('scripting.asserters.textAsserter', function () {
       }, 'PRECOMP')
       assert.deepEqual(actual, [])
     })
+
     it('global is not unique', async function () {
       try {
         flatCababilities({

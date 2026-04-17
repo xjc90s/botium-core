@@ -77,6 +77,7 @@ describe('scripting.asserters.entityValuesAsserter', function () {
       { e4: 1 }
     )
   })
+
   it('expected 3 entities, found 4 entities, negative case, details', async function () {
     try {
       await asserter.assertConvoStep({
@@ -111,6 +112,7 @@ describe('scripting.asserters.entityValuesAsserter', function () {
       { e1: -1 }
     )
   })
+
   it('expected 1... entities, found 1 entities, positive case', async function () {
     return _assert(
       ['e1', '...'],
@@ -118,6 +120,7 @@ describe('scripting.asserters.entityValuesAsserter', function () {
       { e1: -1, e2: 1 }
     )
   })
+
   it('Joker match multiple, positive case', async function () {
     return _assert(
       ['pre1post1', 'pre1'],
@@ -125,6 +128,7 @@ describe('scripting.asserters.entityValuesAsserter', function () {
       { pre1post2: 1 }
     )
   })
+
   it('Joker match multiple, reversed order, positive case', async function () {
     return _assert(
       ['pre1', 'pre1post1'],
@@ -132,6 +136,7 @@ describe('scripting.asserters.entityValuesAsserter', function () {
       { pre1post2: 1 }
     )
   })
+
   it('Joker match, just one match, negative case', async function () {
     return _assert(
       ['pre1'],
@@ -139,6 +144,7 @@ describe('scripting.asserters.entityValuesAsserter', function () {
       { pre1post1: 1, pre1post2: 1 }
     )
   })
+
   it('Joker match, just one match, reversed order, negative case', async function () {
     return _assert(
       ['pre1'],
@@ -146,6 +152,7 @@ describe('scripting.asserters.entityValuesAsserter', function () {
       { pre1post1: 1, pre1post2: 1 }
     )
   })
+
   it('Joker match, multiple by same expected, negative case', async function () {
     return _assert(
       ['pre1', 'pre1'],

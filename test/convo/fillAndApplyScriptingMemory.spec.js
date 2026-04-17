@@ -69,6 +69,7 @@ describe('convo.fillAndApplyScriptingMemory', function () {
       this.compiler = driver.BuildCompiler()
       this.container = await driver.Build()
     })
+
     afterEach(async function () {
       this.container && await this.container.Clean()
     })
@@ -82,6 +83,7 @@ describe('convo.fillAndApplyScriptingMemory', function () {
       assert.isDefined(transcript.scriptingMemory.$myvar)
       assert.equal(transcript.scriptingMemory.$myvar, 'VARVALUE')
     })
+
     it('should fill scripting memory from utterances file', async function () {
       this.compiler.ReadScript(path.resolve(__dirname, 'convos'), 'utt_memory.convo.txt')
       assert.equal(this.compiler.convos.length, 1)
@@ -93,6 +95,7 @@ describe('convo.fillAndApplyScriptingMemory', function () {
       assert.equal(transcript.scriptingMemory.$years, '40')
       assert.equal(transcript.scriptingMemory.$months, '2')
     })
+
     it('should fail on invalid scripting memory', async function () {
       this.compiler.ReadScript(path.resolve(__dirname, 'convos'), 'memory_fail.convo.txt')
       assert.equal(this.compiler.convos.length, 1)
@@ -104,6 +107,7 @@ describe('convo.fillAndApplyScriptingMemory', function () {
         assert.isTrue(err.message.indexOf('Bot response (on Line 9: #me - show var $myvar) "show var VARVALUE" expected to match "show var VARVALUEINVALID"') > 0)
       }
     })
+
     it('should normalize bot response', async function () {
       this.compiler.ReadScript(path.resolve(__dirname, 'convos'), 'memory_normalize.convo.txt')
       assert.equal(this.compiler.convos.length, 1)
@@ -113,6 +117,7 @@ describe('convo.fillAndApplyScriptingMemory', function () {
       assert.isDefined(transcript.scriptingMemory.$state)
       assert.equal(transcript.scriptingMemory.$state, 'Kentucky')
     })
+
     it('should normalize bot response 2', async function () {
       this.compiler.ReadScript(path.resolve(__dirname, 'convos'), 'memory_dont_override_functions.convo.txt')
       assert.equal(this.compiler.convos.length, 1)
@@ -121,6 +126,7 @@ describe('convo.fillAndApplyScriptingMemory', function () {
       assert.isObject(transcript.scriptingMemory)
       assert.isUndefined(transcript.scriptingMemory.$year)
     })
+
     it('should append multiline messages from scripting memory', async function () {
       this.compiler.ReadScript(path.resolve(__dirname, 'convos'), 'multiline.convo.txt')
       assert.equal(this.compiler.convos.length, 1)
@@ -163,6 +169,7 @@ describe('convo.fillAndApplyScriptingMemory', function () {
       const transcript = await compiler.convos[0].Run(container)
       assert.isObject(transcript.scriptingMemory)
     })
+
     it('should apply scripting memory in begin args', async function () {
       const myCaps = {
         [Capabilities.PROJECTNAME]: 'convo.scriptingmemory',
@@ -223,11 +230,13 @@ describe('convo.fillAndApplyScriptingMemory', function () {
         ScriptingMemory.fill(this.containerStub, scriptingMemory, 'test sentence 1', 'test sentence $num', this.convo.scriptingEvents)
         assert.equal(scriptingMemory.$num, '1')
       })
+
       it('should not fill scripting memory from invalid text', async function () {
         const scriptingMemory = {}
         ScriptingMemory.fill(this.containerStub, scriptingMemory, 'test sentence', 'test sentence $num', this.convo.scriptingEvents)
         assert.isUndefined(scriptingMemory.$num)
       })
+
       it('should fill scripting memory from one utterance', async function () {
         this.scriptingProvider.AddUtterances({
           name: 'utt1',
@@ -238,6 +247,7 @@ describe('convo.fillAndApplyScriptingMemory', function () {
         ScriptingMemory.fill(this.containerStub, scriptingMemory, 'test sentence 1', 'utt1', this.convo.scriptingEvents)
         assert.equal(scriptingMemory.$num, '1')
       })
+
       it('should fill multiple scripting memory from one utterance', async function () {
         this.scriptingProvider.AddUtterances({
           name: 'utt1',
@@ -249,6 +259,7 @@ describe('convo.fillAndApplyScriptingMemory', function () {
         assert.equal(scriptingMemory.$num1, '1')
         assert.equal(scriptingMemory.$num2, '2')
       })
+
       it('should fill scripting memory from two different utterances', async function () {
         this.scriptingProvider.AddUtterances({
           name: 'utt1',
@@ -260,6 +271,7 @@ describe('convo.fillAndApplyScriptingMemory', function () {
         assert.equal(scriptingMemory.$months, '2')
         assert.isUndefined(scriptingMemory.$years)
       })
+
       it('should replace utterances from scripting memory', async function () {
         // $Years instead of $years to avoid collision with $year embedded variable
         this.scriptingProvider.AddUtterances({
@@ -274,6 +286,7 @@ describe('convo.fillAndApplyScriptingMemory', function () {
         assert.equal(tomatch[0], 'i am 2 months old')
         assert.equal(tomatch[1], 'i am $Years years old')
       })
+
       it('should accept special regexp characters in utterance when replace utterances from scripting memory in regexp matching mode', async function () {
         this.containerStub.caps[Capabilities.SCRIPTING_MATCHING_MODE] = 'regexp'
 
@@ -284,6 +297,7 @@ describe('convo.fillAndApplyScriptingMemory', function () {
         assert.isArray(tomatch)
         assert.equal(tomatch[0], '.* sentence 1')
       })
+
       it('should accept special regexp characters in utterances when replace utterances from scripting memory in regexp matching mode', async function () {
         this.containerStub.caps[Capabilities.SCRIPTING_MATCHING_MODE] = 'regexp'
         this.scriptingProvider.AddUtterances({
@@ -298,6 +312,7 @@ describe('convo.fillAndApplyScriptingMemory', function () {
         assert.isArray(tomatch)
         assert.equal(tomatch[0], '.* sentence 1')
       })
+
       it('should accept special regexp characters in utterance when filling scripting memory', async function () {
         const scriptingMemory = {}
         ScriptingMemory.fill(this.containerStub, scriptingMemory, '*test sentence 1*', '*test sentence $num*', this.convo.scriptingEvents)
@@ -307,6 +322,7 @@ describe('convo.fillAndApplyScriptingMemory', function () {
         ScriptingMemory.fill(this.containerStub, scriptingMemory1, 'Hier sind deine Erinnerungen: Notiz: 104 | This is a test reminder', 'Hier sind deine Erinnerungen: Notiz: $id | This is a test reminder', this.convo.scriptingEvents)
         assert.equal(scriptingMemory1.$id, '104')
       })
+
       it('should accept special regexp characters in utterances when filling scripting memory', async function () {
         this.scriptingProvider.AddUtterances({
           name: 'utt1',
@@ -316,28 +332,33 @@ describe('convo.fillAndApplyScriptingMemory', function () {
         ScriptingMemory.fill(this.containerStub, scriptingMemory, '[\'I am 2 years old.\']', 'utt1', this.convo.scriptingEvents)
         assert.equal(scriptingMemory.$years, '2')
       })
+
       it('should accept newline characters in utterances when filling scripting memory', async function () {
         const scriptingMemory = {}
         ScriptingMemory.fill(this.containerStub, scriptingMemory, 'test sentence header\n\ntest sentence 1', 'test sentence header\n\ntest sentence $num', this.convo.scriptingEvents)
         assert.equal(scriptingMemory.$num, '1')
       })
+
       it('should accept variable name case sensitive', async function () {
         const scriptingMemory = {}
         ScriptingMemory.fill(this.containerStub, scriptingMemory, 'test sentence 1', 'test sentence $Num', this.convo.scriptingEvents)
         assert.equal(scriptingMemory.$num, undefined)
         assert.equal(scriptingMemory.$Num, '1')
       })
+
       it('should accept variable name as postfix', async function () {
         const scriptingMemory = {}
         ScriptingMemory.fill(this.containerStub, scriptingMemory, 'test sentence a1', 'test sentence a$Num', this.convo.scriptingEvents)
         assert.equal(scriptingMemory.$num, undefined)
         assert.equal(scriptingMemory.$Num, '1')
       })
+
       it('should not change scripting memory functions', async function () {
         const scriptingMemory = {}
         ScriptingMemory.fill(this.containerStub, scriptingMemory, 'test sentence a1', 'test sentence a$now', this.convo.scriptingEvents)
         assert.notEqual(scriptingMemory.$now, '1')
       })
+
       it('should match normalized response', async function () {
         let result = '<speak>Kentucky is the 15th state, admitted to the Union in 1792. The capital of Kentucky is Frankfort, and the abbreviation for Kentucky is <break strength=\'strong\'/><say-as interpret-as=\'spell-out\'>KY</say-as>. I\'ve added Kentucky to your Alexa app. Which other state or capital would you like to know about?</speak>'
         const expected = '$state is the 15th state, admitted to the Union in 1792. The capital of Kentucky is Frankfort, and the abbreviation for Kentucky is KY. I\'ve added Kentucky to your Alexa app. Which other state or capital would you like to know about?'
@@ -348,21 +369,25 @@ describe('convo.fillAndApplyScriptingMemory', function () {
         ScriptingMemory.fill(this.containerStub, scriptingMemory, result, expected, this.convo.scriptingEvents)
         assert.equal(scriptingMemory.$state, 'Kentucky')
       })
+
       it('should match not-whitespace (SCRIPTING_MEMORY_MATCHING_MODE == non_whitespace, default)', async function () {
         const scriptingMemory = {}
         ScriptingMemory.fill(this.containerStub, scriptingMemory, 'date: 28.01.2019', 'date: $somedate', this.convo.scriptingEvents)
         assert.equal(scriptingMemory.$somedate, '28.01.2019')
       })
+
       it('should match not-whitespace (SCRIPTING_MEMORY_MATCHING_MODE == word)', async function () {
         const scriptingMemory = {}
         ScriptingMemory.fill(this.containerStubMatchingModeWord, scriptingMemory, 'my name is joe.', 'my name is $name', this.convo.scriptingEvents)
         assert.equal(scriptingMemory.$name, 'joe')
       })
+
       it('should match multi lines (SCRIPTING_MEMORY_MATCHING_MODE == joker)', async function () {
         const scriptingMemory = {}
         ScriptingMemory.fill(this.containerStubMatchingModeJoker, scriptingMemory, 'test sentence \nline1\r\nline2', 'test sentence $lines', this.convo.scriptingEvents)
         assert.equal(scriptingMemory.$lines, '\nline1\r\nline2')
       })
+
       it('should match multi words (SCRIPTING_MEMORY_MATCHING_MODE == joker)', async function () {
         const scriptingMemory = {}
         ScriptingMemory.fill(this.containerStubMatchingModeJoker, scriptingMemory, 'test sentence match1 match2', 'test sentence $words', this.convo.scriptingEvents)
@@ -473,6 +498,7 @@ describe('convo.fillAndApplyScriptingMemory', function () {
         }
         assert.equal(ScriptingMemory.applyToArgs(asserter.args, scriptingMemory, CAPS_BASE)[1], 5)
       })
+
       it('typo of reference', async function () {
         const asserter = {
           name: 'DUMMY',
@@ -487,6 +513,7 @@ describe('convo.fillAndApplyScriptingMemory', function () {
         }
         assert.notEqual(ScriptingMemory.applyToArgs(asserter.args, scriptingMemory, CAPS_BASE)[1], 5)
       })
+
       it('as postfix', async function () {
         const asserter = {
           name: 'DUMMY',
@@ -501,6 +528,7 @@ describe('convo.fillAndApplyScriptingMemory', function () {
         }
         assert.equal(ScriptingMemory.applyToArgs(asserter.args, scriptingMemory, CAPS_BASE)[1], 'prefix5')
       })
+
       it('as prefix', async function () {
         const asserter = {
           name: 'DUMMY',
@@ -515,6 +543,7 @@ describe('convo.fillAndApplyScriptingMemory', function () {
         }
         assert.equal(ScriptingMemory.applyToArgs(asserter.args, scriptingMemory, CAPS_BASE)[1], '5er')
       })
+
       it('different value', async function () {
         const asserter = {
           name: 'DUMMY',
@@ -580,6 +609,7 @@ describe('convo.fillAndApplyScriptingMemory', function () {
         )
         assert.equal(result, new Date().toLocaleString())
       })
+
       it('now_EN', async function () {
         const result = ScriptingMemory.apply(
           { caps: CAPS_ENABLE_SCRIPTING_MEMORY },
@@ -590,6 +620,7 @@ describe('convo.fillAndApplyScriptingMemory', function () {
         assert(result.lastIndexOf(':') > 10, 'wrong format')
         assert(result.lastIndexOf(':') > 10, 'wrong format')
       })
+
       it('now_DE', async function () {
         const result = ScriptingMemory.apply(
           { caps: CAPS_ENABLE_SCRIPTING_MEMORY },
@@ -599,6 +630,7 @@ describe('convo.fillAndApplyScriptingMemory', function () {
         assert(result.indexOf('.') === 2)
         assert(result.lastIndexOf(':') > 10)
       })
+
       it('now_ISO', async function () {
         const result = ScriptingMemory.apply(
           { caps: CAPS_ENABLE_SCRIPTING_MEMORY },
@@ -618,6 +650,7 @@ describe('convo.fillAndApplyScriptingMemory', function () {
         )
         assert.equal(result, new Date().toLocaleDateString())
       })
+
       it('date with param', async function () {
         const result = ScriptingMemory.apply(
           { caps: CAPS_ENABLE_SCRIPTING_MEMORY },
@@ -626,6 +659,7 @@ describe('convo.fillAndApplyScriptingMemory', function () {
         )
         assert.equal(result.length, 4)
       })
+
       it('date_EN', async function () {
         const result = ScriptingMemory.apply(
           { caps: CAPS_ENABLE_SCRIPTING_MEMORY },
@@ -636,6 +670,7 @@ describe('convo.fillAndApplyScriptingMemory', function () {
         assert(result.indexOf('/') <= 2, 'wrong format')
         assert(result.lastIndexOf('/') <= 5, 'wrong format')
       })
+
       it('date_DE', async function () {
         const result = ScriptingMemory.apply(
           { caps: CAPS_ENABLE_SCRIPTING_MEMORY },
@@ -646,6 +681,7 @@ describe('convo.fillAndApplyScriptingMemory', function () {
         assert(result.indexOf('.') === 4, 'wrong format')
         assert(result.lastIndexOf('.') === 7, 'wrong format')
       })
+
       it('date_ISO', async function () {
         const result = ScriptingMemory.apply(
           { caps: CAPS_ENABLE_SCRIPTING_MEMORY },
@@ -665,6 +701,7 @@ describe('convo.fillAndApplyScriptingMemory', function () {
         )
         assert(result.indexOf(':') < 3)
       })
+
       it('time_EN', async function () {
         const result = ScriptingMemory.apply(
           { caps: CAPS_ENABLE_SCRIPTING_MEMORY },
@@ -674,6 +711,7 @@ describe('convo.fillAndApplyScriptingMemory', function () {
         assert(result.indexOf(':') < 3)
         assert(result.lastIndexOf(' ') < 9)
       })
+
       it('time_DE', async function () {
         const result = ScriptingMemory.apply(
           { caps: CAPS_ENABLE_SCRIPTING_MEMORY },
@@ -682,6 +720,7 @@ describe('convo.fillAndApplyScriptingMemory', function () {
         )
         assert(result.indexOf(':') !== result.lastIndexOf(':'))
       })
+
       it('time_ISO', async function () {
         const result = ScriptingMemory.apply(
           { caps: CAPS_ENABLE_SCRIPTING_MEMORY },
@@ -690,6 +729,7 @@ describe('convo.fillAndApplyScriptingMemory', function () {
         )
         assert(result.indexOf(':') !== result.lastIndexOf(':'))
       })
+
       it('time_HH_MM', async function () {
         const result = ScriptingMemory.apply(
           { caps: CAPS_ENABLE_SCRIPTING_MEMORY },
@@ -698,6 +738,7 @@ describe('convo.fillAndApplyScriptingMemory', function () {
         )
         assert(result.indexOf(':') === 2)
       })
+
       it('time_H_A', async function () {
         const result = ScriptingMemory.apply(
           { caps: CAPS_ENABLE_SCRIPTING_MEMORY },
@@ -724,6 +765,7 @@ describe('convo.fillAndApplyScriptingMemory', function () {
         )
         assert.equal(result, moment().add(1, 'day').toDate().toLocaleDateString())
       })
+
       it('tomorrow with format', async function () {
         const result = ScriptingMemory.apply(
           { caps: CAPS_ENABLE_SCRIPTING_MEMORY },
@@ -732,6 +774,7 @@ describe('convo.fillAndApplyScriptingMemory', function () {
         )
         assert.equal(result, moment().add(1, 'day').format('YYYY.MM.DD'))
       })
+
       it('yesterday without format', async function () {
         const result = ScriptingMemory.apply(
           { caps: CAPS_ENABLE_SCRIPTING_MEMORY },
@@ -740,6 +783,7 @@ describe('convo.fillAndApplyScriptingMemory', function () {
         )
         assert.equal(result, moment().subtract(1, 'day').toDate().toLocaleDateString())
       })
+
       it('yesterday with format', async function () {
         const result = ScriptingMemory.apply(
           { caps: CAPS_ENABLE_SCRIPTING_MEMORY },
@@ -768,6 +812,7 @@ describe('convo.fillAndApplyScriptingMemory', function () {
         )
         assert.equal(result, moment().format('MMMM'), '$month invalid')
       })
+
       it('month_MM', async function () {
         const result = ScriptingMemory.apply(
           { caps: CAPS_ENABLE_SCRIPTING_MEMORY },
@@ -808,6 +853,7 @@ describe('convo.fillAndApplyScriptingMemory', function () {
 
         assert.equal(result, moment().add(1, 'day').format('YYYY.MM.DD'))
       })
+
       it('date_subtract', async function () {
         const result = ScriptingMemory.apply(
           { caps: CAPS_ENABLE_SCRIPTING_MEMORY },
@@ -817,6 +863,7 @@ describe('convo.fillAndApplyScriptingMemory', function () {
 
         assert.equal(result, moment().subtract(1, 'month').format('YYYY.MM.DD'))
       })
+
       it('date_add_dynamic', async function () {
         const result = ScriptingMemory.apply(
           { caps: CAPS_ENABLE_SCRIPTING_MEMORY },
@@ -838,6 +885,7 @@ describe('convo.fillAndApplyScriptingMemory', function () {
 
         assert(result.length === 19, '$random invalid')
       })
+
       it('random10', async function () {
         const result = ScriptingMemory.apply(
           { caps: CAPS_ENABLE_SCRIPTING_MEMORY },
@@ -867,6 +915,7 @@ describe('convo.fillAndApplyScriptingMemory', function () {
         )
         assert.equal(result, 'botium')
       })
+
       it('environment variable reject', async function () {
         process.env.MY_VAR_VALUE = 'botium'
         try {
@@ -880,6 +929,7 @@ describe('convo.fillAndApplyScriptingMemory', function () {
           assert.isTrue(err.message.indexOf('Using unsafe scripting memory function $env is not allowed') >= 0)
         }
       })
+
       it('cap', async function () {
         const result = ScriptingMemory.apply(
           { caps: Object.assign({}, CAPS_ENABLE_SCRIPTING_MEMORY, { mycap: 'botium' }) },
@@ -888,6 +938,7 @@ describe('convo.fillAndApplyScriptingMemory', function () {
         )
         assert.equal(result, 'botium')
       })
+
       it('msg with messageText', async function () {
         const result = ScriptingMemory.apply(
           { caps: CAPS_ENABLE_SCRIPTING_MEMORY },
@@ -897,6 +948,7 @@ describe('convo.fillAndApplyScriptingMemory', function () {
         )
         assert.equal(result, 'botium')
       })
+
       it('msg with messageText twice', async function () {
         const result = ScriptingMemory.apply(
           { caps: CAPS_ENABLE_SCRIPTING_MEMORY },
@@ -906,6 +958,7 @@ describe('convo.fillAndApplyScriptingMemory', function () {
         )
         assert.equal(result, 'botium botium')
       })
+
       it('msg with sourceData', async function () {
         const result = ScriptingMemory.apply(
           { caps: CAPS_ENABLE_SCRIPTING_MEMORY },
@@ -918,6 +971,7 @@ describe('convo.fillAndApplyScriptingMemory', function () {
         )
         assert.equal(result, 'botium')
       })
+
       it('projectname', async function () {
         const result = ScriptingMemory.apply(
           { caps: Object.assign({}, CAPS_ENABLE_SCRIPTING_MEMORY, { PROJECTNAME: 'botium' }) },
@@ -926,6 +980,7 @@ describe('convo.fillAndApplyScriptingMemory', function () {
         )
         assert.equal(result, 'botium')
       })
+
       it('testsessionname', async function () {
         const result = ScriptingMemory.apply(
           { caps: Object.assign({}, CAPS_ENABLE_SCRIPTING_MEMORY, { TESTSESSIONNAME: 'botium' }) },
@@ -934,6 +989,7 @@ describe('convo.fillAndApplyScriptingMemory', function () {
         )
         assert.equal(result, 'botium')
       })
+
       it('testcasename', async function () {
         const result = ScriptingMemory.apply(
           { caps: Object.assign({}, CAPS_ENABLE_SCRIPTING_MEMORY, { TESTCASENAME: 'botium' }) },

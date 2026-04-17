@@ -28,6 +28,7 @@ describe('scripting.asserters.buttonsAsserter', function () {
         }
       })
     })
+
     it('should succeed on existing card button', async function () {
       const payload = {
         value: 'test'
@@ -49,6 +50,7 @@ describe('scripting.asserters.buttonsAsserter', function () {
         }
       })
     })
+
     it('should succeed on existing card buttons', async function () {
       const payload = {
         value: 'test'
@@ -79,6 +81,7 @@ describe('scripting.asserters.buttonsAsserter', function () {
         }
       })
     })
+
     it('should succeed on not existing button', async function () {
       const notPayload = {
         value: 'test1'
@@ -98,6 +101,7 @@ describe('scripting.asserters.buttonsAsserter', function () {
         }
       })
     })
+
     it('should fail on unexpected button', async function () {
       const buttons = [
         {
@@ -124,6 +128,7 @@ describe('scripting.asserters.buttonsAsserter', function () {
         assert.deepEqual(err.context.cause.diff, ['test'])
       }
     })
+
     it('should fail on unexpected button payload', async function () {
       const payload = {
         value: 'test'
@@ -154,6 +159,7 @@ describe('scripting.asserters.buttonsAsserter', function () {
         assert.deepEqual(err.context.cause.diff, [JSON.stringify(payload)])
       }
     })
+
     it('should succeed on existing button if has no arg', async function () {
       await this.buttonsAsserter.assertConvoStep({
         convoStep: { stepTag: 'test' },
@@ -167,6 +173,7 @@ describe('scripting.asserters.buttonsAsserter', function () {
         }
       })
     })
+
     it('should fail on no button if has no arg', async function () {
       try {
         await this.buttonsAsserter.assertConvoStep({ convoStep: { stepTag: 'test' } })
@@ -181,9 +188,11 @@ describe('scripting.asserters.buttonsAsserter', function () {
         assert.deepEqual(err.context.cause.actual, '[]')
       }
     })
+
     it('should succeed on not existing button if has no arg and negated', async function () {
       await this.buttonsAsserter.assertNotConvoStep({ convoStep: { stepTag: 'test' } })
     })
+
     it('should fail on button if has no arg and negated', async function () {
       const buttons = [
         {
@@ -210,6 +219,7 @@ describe('scripting.asserters.buttonsAsserter', function () {
       }
     })
   })
+
   describe('buttonsCountAsserter', function () {
     beforeEach(async function () {
       this.buttonsCountAsserter = new ButtonsCountAsserter({}, {})
@@ -225,6 +235,7 @@ describe('scripting.asserters.buttonsAsserter', function () {
         }
       })
     })
+
     it('should succeed on 3 with 3 buttons', async function () {
       await this.buttonsCountAsserter.assertConvoStep({
         convoStep: { stepTag: 'test' },
@@ -240,6 +251,7 @@ describe('scripting.asserters.buttonsAsserter', function () {
         }
       })
     })
+
     it('should fail on 3 with 4 buttons', async function () {
       try {
         await this.buttonsCountAsserter.assertConvoStep({
@@ -260,6 +272,7 @@ describe('scripting.asserters.buttonsAsserter', function () {
         assert.isTrue(err.message.indexOf('Expected Buttons count 4 to be 3') >= 0)
       }
     })
+
     it('should fail on >3 with 3 buttons', async function () {
       try {
         await this.buttonsCountAsserter.assertConvoStep({
@@ -280,6 +293,7 @@ describe('scripting.asserters.buttonsAsserter', function () {
         assert.isTrue(err.message.indexOf('Expected Buttons count 3 to be >3') >= 0)
       }
     })
+
     it('should succeed on >=3 with rec buttons', async function () {
       await this.buttonsCountRecAsserter.assertConvoStep({
         convoStep: { stepTag: 'test' },
@@ -295,6 +309,7 @@ describe('scripting.asserters.buttonsAsserter', function () {
         }
       })
     })
+
     it('should succeed on 3 with rec buttons', async function () {
       await this.buttonsCountRecAsserter.assertConvoStep({
         convoStep: { stepTag: 'test' },

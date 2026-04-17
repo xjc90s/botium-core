@@ -49,10 +49,6 @@ module.exports = class GridContainer extends BaseContainer {
           debug(`unauthorized ${err.message}`)
           socketComplete(`Grid Access not authorized: ${err.message}`)
         })
-        this.socket.on(Events.TOOMUCHWORKERS_ERROR, (err) => {
-          debug(`TOOMUCHWORKERS_ERROR ${err.message}`)
-          socketComplete(`Grid Access not possible: ${err.message}`)
-        })
         this.socket.on(Events.CONTAINER_BUILT, () => {
           debug(Events.CONTAINER_BUILT)
           socketComplete()

@@ -46,6 +46,7 @@ describe('security.allowUnsafe', function () {
         [Capabilities.SECURITY_ALLOW_UNSAFE]: false
       }, () => null)
     })
+
     it('should not accept file hook in safe mode', async function () {
       try {
         HookUtils.getHook({
@@ -57,12 +58,14 @@ describe('security.allowUnsafe', function () {
         assert.isTrue(err.message.indexOf('invalid') >= 0)
       }
     })
+
     it('should accept file hook from safe dir in unsafe mode', async function () {
       HookUtils.getHook({
         [Capabilities.SECURITY_ALLOW_UNSAFE]: true,
         [Capabilities.SAFEDIR]: 'test/security/'
       }, 'resources/hook-as-file.js')
     })
+
     it('should not accept file hook from outside safe dir', async function () {
       try {
         HookUtils.getHook({
@@ -74,6 +77,7 @@ describe('security.allowUnsafe', function () {
         assert.isTrue(err.message.indexOf('invalid') >= 0)
       }
     })
+
     it('should accept require hook in unsafe mode', async function () {
       HookUtils.getHook({
         [Capabilities.SECURITY_ALLOW_UNSAFE]: true
@@ -161,6 +165,7 @@ describe('security.allowUnsafe', function () {
       })
       await driver.Build()
     })
+
     it('should create any connector from safedir', async function () {
       const driver = new BotDriver({
         [Capabilities.SAFEDIR]: 'test/security/',

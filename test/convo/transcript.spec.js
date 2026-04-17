@@ -164,6 +164,7 @@ describe('convo.transcript', function () {
     this.containerMultipleBotmessagesAssertionFailOnOptional = await this.driverMultipleBotmessagesAssertionFailOnOptional.Build()
     await this.containerMultipleBotmessagesAssertionFailOnOptional.Start()
   })
+
   afterEach(async function () {
     await this.container.Stop()
     await this.container.Clean()
@@ -172,6 +173,7 @@ describe('convo.transcript', function () {
     await this.containerSkipAssertErrors.Stop()
     await this.containerSkipAssertErrors.Clean()
   })
+
   it('should provide transcript steps on success', async function () {
     this.compiler.ReadScript(path.resolve(__dirname, 'convos'), '2steps.convo.txt')
     assert.equal(this.compiler.convos.length, 1)
@@ -188,6 +190,7 @@ describe('convo.transcript', function () {
       assert.isTrue(moment(step.stepBegin).isSameOrBefore(step.stepEnd), 'begin should be same or before end')
     })
   })
+
   it('should provide transcript negated steps on success', async function () {
     this.compiler.ReadScript(path.resolve(__dirname, 'convos'), '2stepsneg.convo.txt')
     assert.equal(this.compiler.convos.length, 1)
@@ -197,6 +200,7 @@ describe('convo.transcript', function () {
     assert.equal(transcript.steps.length, 2)
     assert.isTrue(transcript.steps[1].not)
   })
+
   it('should provide transcript optional steps on success', async function () {
     this.compiler.ReadScript(path.resolve(__dirname, 'convos'), '2stepsopt.convo.txt')
     assert.equal(this.compiler.convos.length, 1)
@@ -205,6 +209,7 @@ describe('convo.transcript', function () {
     assert.isDefined(transcript)
     assert.equal(transcript.steps.length, 2)
   })
+
   it('should provide transcript optional negated steps on success', async function () {
     this.compiler.ReadScript(path.resolve(__dirname, 'convos'), '2stepsoptneg.convo.txt')
     assert.equal(this.compiler.convos.length, 1)
@@ -213,6 +218,7 @@ describe('convo.transcript', function () {
     assert.isDefined(transcript)
     assert.equal(transcript.steps.length, 2)
   })
+
   it('should provide transcript optional steps on success skipping step', async function () {
     this.compiler.ReadScript(path.resolve(__dirname, 'convos'), '2stepsoptskip.convo.txt')
     assert.equal(this.compiler.convos.length, 1)
@@ -221,6 +227,7 @@ describe('convo.transcript', function () {
     assert.isDefined(transcript)
     assert.equal(transcript.steps.length, 2)
   })
+
   it('should provide transcript optional steps on failing', async function () {
     this.compiler.ReadScript(path.resolve(__dirname, 'convos'), '2stepsoptfollowme.convo.txt')
     assert.equal(this.compiler.convos.length, 1)
@@ -236,6 +243,7 @@ describe('convo.transcript', function () {
       assert.isDefined(err.transcript.steps[1].err)
     }
   })
+
   it('should provide transcript optional steps on success with asserters', async function () {
     this.compiler.ReadScript(path.resolve(__dirname, 'convos'), 'assertersopt.convo.txt')
     assert.equal(this.compiler.convos.length, 1)
@@ -244,6 +252,7 @@ describe('convo.transcript', function () {
     assert.isDefined(transcript)
     assert.equal(transcript.steps.length, 2)
   })
+
   it('should provide transcript optional steps on success skipping steps with asserters', async function () {
     this.compiler.ReadScript(path.resolve(__dirname, 'convos'), 'assertersoptskip.convo.txt')
     assert.equal(this.compiler.convos.length, 1)
@@ -252,6 +261,7 @@ describe('convo.transcript', function () {
     assert.isDefined(transcript)
     assert.equal(transcript.steps.length, 2)
   })
+
   it('should provide transcript optional multiple bot steps on getting all bot messages', async function () {
     this.compiler.ReadScript(path.resolve(__dirname, 'convos'), 'welcome_multiple_botsteps_opt.convo.txt')
     assert.equal(this.compiler.convos.length, 1)
@@ -260,6 +270,7 @@ describe('convo.transcript', function () {
     assert.isDefined(transcript)
     assert.equal(transcript.steps.length, 6)
   })
+
   it('should provide transcript optional multiple bot steps on skip an optional bot messages', async function () {
     this.compiler.ReadScript(path.resolve(__dirname, 'convos'), 'welcome_multiple_botsteps_opt.convo.txt')
     assert.equal(this.compiler.convos.length, 1)
@@ -268,6 +279,7 @@ describe('convo.transcript', function () {
     assert.isDefined(transcript)
     assert.equal(transcript.steps.length, 5)
   })
+
   it('should provide transcript optional multiple bot steps assertion fail on optional bot messages', async function () {
     this.compiler.ReadScript(path.resolve(__dirname, 'convos'), 'welcome_multiple_botsteps_opt.convo.txt')
     assert.equal(this.compiler.convos.length, 1)
@@ -281,6 +293,7 @@ describe('convo.transcript', function () {
       assert.isTrue(err.message.includes('Unexpected message'))
     }
   })
+
   it('should provide transcript optional multiple bot steps on not getting all bot messages', async function () {
     this.compiler.ReadScript(path.resolve(__dirname, 'convos'), 'welcome_multiple_botsteps_opt.convo.txt')
     assert.equal(this.compiler.convos.length, 1)
@@ -289,6 +302,7 @@ describe('convo.transcript', function () {
     assert.isDefined(transcript)
     assert.equal(transcript.steps.length, 5)
   })
+
   it('should include pause in transcript steps', async function () {
     this.compiler.ReadScript(path.resolve(__dirname, 'convos'), '2stepsWithPause.convo.txt')
     assert.equal(this.compiler.convos.length, 1)
@@ -301,6 +315,7 @@ describe('convo.transcript', function () {
     assert.equal(transcript.steps.length, 4)
     assert.isTrue(moment(transcript.steps[2].stepEnd).diff(transcript.steps[2].stepBegin) >= 1000, 'begin should be at least 1000 ms before end')
   })
+
   it('should provide transcript steps on failing', async function () {
     this.compiler.ReadScript(path.resolve(__dirname, 'convos'), '2stepsfailing.convo.txt')
     assert.equal(this.compiler.convos.length, 1)
@@ -319,10 +334,12 @@ describe('convo.transcript', function () {
       assert.isDefined(err.transcript.steps[3].err)
     }
   })
+
   it('should not fail on invalid sender', async function () {
     this.compiler.ReadScript(path.resolve(__dirname, 'convos'), 'invalidsender.convo.txt')
     assert.equal(this.compiler.convos.length, 1)
   })
+
   it('should emit transcript event on success', async function () {
     this.compiler.ReadScript(path.resolve(__dirname, 'convos'), '2steps.convo.txt')
     assert.equal(this.compiler.convos.length, 1)
@@ -333,6 +350,7 @@ describe('convo.transcript', function () {
     await this.compiler.convos[0].Run(this.container)
     assert.isDefined(transcript)
   })
+
   it('should emit transcript event on failure', async function () {
     this.compiler.ReadScript(path.resolve(__dirname, 'convos'), '2stepsfailing.convo.txt')
     assert.equal(this.compiler.convos.length, 1)
@@ -347,6 +365,7 @@ describe('convo.transcript', function () {
       assert.isDefined(transcript)
     }
   })
+
   it('should handle expected JSON response', async function () {
     this.compiler.ReadScript(path.resolve(__dirname, 'convos'), 'json-matching-key-and-value.convo.txt')
     assert.equal(this.compiler.convos.length, 1)
@@ -362,6 +381,7 @@ describe('convo.transcript', function () {
       assert.fail('unexpected error: ' + error)
     })
   })
+
   it('should handle fail with mismatching key in JSON response', async function () {
     this.compiler.ReadScript(path.resolve(__dirname, 'convos'), 'json-mismatching-key.convo.txt')
     assert.equal(this.compiler.convos.length, 1)
@@ -375,6 +395,7 @@ describe('convo.transcript', function () {
       assert.isNotNull(transcript)
     })
   })
+
   it('should handle fail with mismatching value in JSON response', async function () {
     this.compiler.ReadScript(path.resolve(__dirname, 'convos'), 'json-mismatching-value.convo.txt')
     assert.equal(this.compiler.convos.length, 1)
@@ -388,6 +409,7 @@ describe('convo.transcript', function () {
       assert.isDefined(transcript)
     })
   })
+
   it('should emit transcript with asserters', async function () {
     this.compiler.ReadScript(path.resolve(__dirname, 'convos'), 'asserters.convo.txt')
 
@@ -406,6 +428,7 @@ describe('convo.transcript', function () {
       assert.lengthOf(transcript.steps[1].expected.asserters[0].args, 2)
     }
   })
+
   it('should throw simple error with multiple asserting errors if its disabled', async function () {
     this.compiler.ReadScript(path.resolve(__dirname, 'convos'), 'multiple_asserting_errors.convo.txt')
 
@@ -418,6 +441,7 @@ describe('convo.transcript', function () {
         'asserters/Line 6: Bot response (on Line 3: #me - Hello) "Hello" expected to match "Goodbye!"')
     }
   })
+
   it('should throw simple error with multiple asserting errors if its enabled', async function () {
     this.compilerMultipleAssertErrors.ReadScript(path.resolve(__dirname, 'convos'), 'multiple_asserting_errors.convo.txt')
 
@@ -440,6 +464,7 @@ describe('convo.transcript', function () {
       assert.equal(err.transcript.err.context.errors[2].source, 'Buttons Asserter')
     }
   })
+
   it('should throw simple error with multiple asserting errors if its enabled and assertConvoEnd fail', async function () {
     this.compilerMultipleAssertErrors.ReadScript(path.resolve(__dirname, 'convos'), 'multiple_asserting_errors.convo.txt')
     this.compilerMultipleAssertErrors.convos[0].scriptingEvents.assertConvoEnd = () => {
@@ -472,6 +497,7 @@ describe('convo.transcript', function () {
       assert.equal(err.transcript.err.context.errors[3].source, 'assertConvoEnd')
     }
   })
+
   it('should fail on unconsumed bot reply on #me', async function () {
     this.compiler.ReadScript(path.resolve(__dirname, 'convos'), 'botreply_not_consumed_me.convo.txt')
     assert.equal(this.compiler.convos.length, 1)
@@ -482,6 +508,7 @@ describe('convo.transcript', function () {
       assert.isTrue(err.message.indexOf('There is an unread bot reply in queue') >= 0)
     }
   })
+
   it('should fail on unconsumed bot reply on #end', async function () {
     this.compilerMultipleAssertErrors.ReadScript(path.resolve(__dirname, 'convos'), 'botreply_not_consumed_end.convo.txt')
     assert.equal(this.compilerMultipleAssertErrors.convos.length, 1)
@@ -492,21 +519,25 @@ describe('convo.transcript', function () {
       assert.isTrue(err.message.indexOf('There is an unread bot reply in queue') >= 0)
     }
   })
+
   it('should succeed on not unconsumed bot reply on #end', async function () {
     this.compilerMultipleAssertErrors.ReadScript(path.resolve(__dirname, 'convos'), 'botreply_not_consumed_end_not.convo.txt')
     assert.equal(this.compilerMultipleAssertErrors.convos.length, 1)
     await this.compilerMultipleAssertErrors.convos[0].Run(this.containerMultipleAssertErrors)
   })
+
   it('should succeed on unconsumed bot reply count', async function () {
     this.compilerMultipleAssertErrors.ReadScript(path.resolve(__dirname, 'convos'), 'botreply_unconsumed_count.convo.txt')
     assert.equal(this.compilerMultipleAssertErrors.convos.length, 1)
     await this.compilerMultipleAssertErrors.convos[0].Run(this.containerMultipleAssertErrors)
   })
+
   it('should succeed on clearing unconsumed bot reply', async function () {
     this.compilerMultipleAssertErrors.ReadScript(path.resolve(__dirname, 'convos'), 'botreply_skip_unconsumed.convo.txt')
     assert.equal(this.compilerMultipleAssertErrors.convos.length, 1)
     await this.compilerMultipleAssertErrors.convos[0].Run(this.containerMultipleAssertErrors)
   })
+
   it('should continue on failing assertion', async function () {
     this.compilerSkipAssertErrors.ReadScript(path.resolve(__dirname, 'convos'), 'continuefailing.convo.txt')
     assert.equal(this.compilerSkipAssertErrors.convos.length, 1)
@@ -528,6 +559,7 @@ describe('convo.transcript', function () {
       assert.isNull(err.transcript.steps[5].err)
     }
   })
+
   it('should continue on failing assertion with timeout', async function () {
     this.compilerSkipAssertErrors.ReadScript(path.resolve(__dirname, 'convos'), 'continuefailing_timeout.convo.txt')
     assert.equal(this.compilerSkipAssertErrors.convos.length, 1)
@@ -544,6 +576,7 @@ describe('convo.transcript', function () {
       assert.equal(err.transcript.steps.length, 5)
     }
   })
+
   it('should calculate assertion count', async function () {
     this.compiler.ReadScript(path.resolve(__dirname, 'convos'), '2steps.convo.txt')
     assert.equal(this.compiler.convos.length, 1)

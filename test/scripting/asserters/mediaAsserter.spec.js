@@ -24,6 +24,7 @@ describe('scripting.asserters.mediaAsserter', function () {
         }
       })
     })
+
     it('should succeed on existing card image', async function () {
       await this.mediaAsserter.assertConvoStep({
         convoStep: { stepTag: 'test' },
@@ -37,6 +38,7 @@ describe('scripting.asserters.mediaAsserter', function () {
         }
       })
     })
+
     it('should succeed on existing card media', async function () {
       await this.mediaAsserter.assertConvoStep({
         convoStep: { stepTag: 'test' },
@@ -55,6 +57,7 @@ describe('scripting.asserters.mediaAsserter', function () {
         }
       })
     })
+
     it('should fail on missing media', async function () {
       try {
         await this.mediaAsserter.assertConvoStep({
@@ -74,6 +77,7 @@ describe('scripting.asserters.mediaAsserter', function () {
         assert.deepEqual(err.context.cause.diff, ['test.jpg'])
       }
     })
+
     it('should succeed on not existing media', async function () {
       await this.mediaAsserter.assertNotConvoStep({
         convoStep: { stepTag: 'test' },
@@ -87,6 +91,7 @@ describe('scripting.asserters.mediaAsserter', function () {
         }
       })
     })
+
     it('should fail on unexpected media', async function () {
       try {
         await this.mediaAsserter.assertNotConvoStep({
@@ -115,6 +120,7 @@ describe('scripting.asserters.mediaAsserter', function () {
         assert.deepEqual(err.context.cause.diff, ['test1.jpg'])
       }
     })
+
     it('should succeed on existing media if has no arg', async function () {
       await this.mediaAsserter.assertConvoStep({
         convoStep: { stepTag: 'test' },
@@ -128,6 +134,7 @@ describe('scripting.asserters.mediaAsserter', function () {
         }
       })
     })
+
     it('should fail on no media if has no arg', async function () {
       try {
         await this.mediaAsserter.assertConvoStep({ convoStep: { stepTag: 'test' } })
@@ -142,9 +149,11 @@ describe('scripting.asserters.mediaAsserter', function () {
         assert.deepEqual(err.context.cause.actual, [])
       }
     })
+
     it('should succeed on not existing media if has no arg and negated', async function () {
       await this.mediaAsserter.assertNotConvoStep({ convoStep: { stepTag: 'test' } })
     })
+
     it('should fail on media if has no arg and negated', async function () {
       try {
         await this.mediaAsserter.assertNotConvoStep({
@@ -186,6 +195,7 @@ describe('scripting.asserters.mediaAsserter', function () {
         }
       })
     })
+
     it('should fail on no args with no media', async function () {
       try {
         await this.mediaCountAsserter.assertConvoStep({
@@ -200,6 +210,7 @@ describe('scripting.asserters.mediaAsserter', function () {
         assert.isTrue(err.message.indexOf('Expected Media count 0 to be >0') >= 0)
       }
     })
+
     it('should succeed on >=0 with one media', async function () {
       await this.mediaCountAsserter.assertConvoStep({
         convoStep: { stepTag: 'test' },
@@ -209,6 +220,7 @@ describe('scripting.asserters.mediaAsserter', function () {
         }
       })
     })
+
     it('should succeed on >0 with one media', async function () {
       await this.mediaCountAsserter.assertConvoStep({
         convoStep: { stepTag: 'test' },
@@ -218,6 +230,7 @@ describe('scripting.asserters.mediaAsserter', function () {
         }
       })
     })
+
     it('should fail on >1 with one media', async function () {
       try {
         await this.mediaCountAsserter.assertConvoStep({
@@ -232,6 +245,7 @@ describe('scripting.asserters.mediaAsserter', function () {
         assert.isTrue(err.message.indexOf('Expected Media count 1 to be >1') >= 0)
       }
     })
+
     it('should succeed on <=1 with one media', async function () {
       await this.mediaCountAsserter.assertConvoStep({
         convoStep: { stepTag: 'test' },
@@ -241,6 +255,7 @@ describe('scripting.asserters.mediaAsserter', function () {
         }
       })
     })
+
     it('should succeed on <2 with one media', async function () {
       await this.mediaCountAsserter.assertConvoStep({
         convoStep: { stepTag: 'test' },
@@ -250,6 +265,7 @@ describe('scripting.asserters.mediaAsserter', function () {
         }
       })
     })
+
     it('should succeed on no args with ! no media', async function () {
       await this.mediaCountAsserter.assertNotConvoStep({
         convoStep: { stepTag: 'test' },
@@ -259,6 +275,7 @@ describe('scripting.asserters.mediaAsserter', function () {
         }
       })
     })
+
     it('should fail on one args with ! one media', async function () {
       try {
         await this.mediaCountAsserter.assertNotConvoStep({
@@ -273,6 +290,7 @@ describe('scripting.asserters.mediaAsserter', function () {
         assert.isTrue(err.message.indexOf('Not expected Media count 1 to be >0') >= 0)
       }
     })
+
     it('should succeed on >1 with ! no media', async function () {
       await this.mediaCountAsserter.assertNotConvoStep({
         convoStep: { stepTag: 'test' },
@@ -282,6 +300,7 @@ describe('scripting.asserters.mediaAsserter', function () {
         }
       })
     })
+
     it('should fail on >1 with ! two media', async function () {
       try {
         await this.mediaCountAsserter.assertNotConvoStep({
@@ -296,6 +315,7 @@ describe('scripting.asserters.mediaAsserter', function () {
         assert.isTrue(err.message.indexOf('Not expected Media count 2 to be >1') >= 0)
       }
     })
+
     it('should succeed on >3 with rec media', async function () {
       await this.mediaCountRecAsserter.assertConvoStep({
         convoStep: { stepTag: 'test' },

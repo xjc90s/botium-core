@@ -40,9 +40,11 @@ describe('utils', function () {
     it('should format seconds', function () {
       assert.equal(formatTimeout(2000), '2s')
     })
+
     it('should format milliseconds', function () {
       assert.equal(formatTimeout(800), '800ms')
     })
+
     it('should format seconds and milliseconds', function () {
       assert.equal(formatTimeout(2400), '2s 400ms')
     })
